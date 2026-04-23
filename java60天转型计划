@@ -1,0 +1,3686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>60天Java全栈转型实战计划</title>
+<style>
+  :root{--primary:#2563eb;--primary-dark:#1d4ed8;--success:#16a34a;--warning:#d97706;--danger:#dc2626;--bg:#f8fafc;--card:#ffffff;--text:#1e293b;--text-secondary:#64748b;--border:#e2e8f0;--code-bg:#1e1e2e;--code-text:#cdd6f4;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  .container{max-width:1100px;margin:0 auto;padding:24px}
+  header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:48px 24px;text-align:center;border-radius:0 0 24px 24px;margin-bottom:32px}
+  header h1{font-size:2.2rem;margin-bottom:12px}
+  header p{opacity:.9;font-size:1.1rem}
+  .badge{display:inline-block;padding:4px 12px;border-radius:999px;font-size:.8rem;font-weight:600;margin:4px;background:rgba(255,255,255,.2)}
+  h2{font-size:1.6rem;margin:40px 0 16px;color:var(--primary-dark);border-left:4px solid var(--primary);padding-left:12px}
+  h3{font-size:1.25rem;margin:28px 0 12px;color:var(--text)}
+  h4{font-size:1.05rem;margin:20px 0 8px;color:var(--text-secondary)}
+  .intro{background:var(--card);padding:24px;border-radius:16px;border:1px solid var(--border);margin-bottom:24px}
+  .week-card{background:var(--card);border-radius:16px;border:1px solid var(--border);margin-bottom:32px;overflow:hidden}
+  .week-header{background:linear-gradient(90deg,var(--primary),#3b82f6);color:#fff;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+  .week-header h3{margin:0;color:#fff}
+  .week-body{padding:20px 24px}
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.92rem}
+  th,td{border:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:#f1f5f9;font-weight:600;color:var(--text-secondary)}
+  tr:nth-child(even){background:#fafafa}
+  .day-section{margin:24px 0;padding:20px;background:#fafafa;border-radius:12px;border-left:4px solid var(--primary)}
+  .day-title{font-size:1.15rem;font-weight:700;color:var(--primary-dark);margin-bottom:8px}
+  .day-meta{font-size:.85rem;color:var(--text-secondary);margin-bottom:12px}
+  pre{background:var(--code-bg);color:var(--code-text);padding:16px;border-radius:10px;overflow-x:auto;font-family:"Fira Code",Consolas,monospace;font-size:.88rem;margin:12px 0}
+  code{font-family:"Fira Code",Consolas,monospace;background:#eef2ff;padding:2px 6px;border-radius:4px;font-size:.9em;color:var(--primary-dark)}
+  pre code{background:none;padding:0;color:inherit}
+  .tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:.78rem;font-weight:600;margin:2px 4px 2px 0}
+  .tag-fe{background:#dbeafe;color:#1e40af}
+  .tag-qa{background:#dcfce7;color:#166534}
+  .tag-ai{background:#f3e8ff;color:#6b21a8}
+  .tag-pitfall{background:#fee2e2;color:#991b1b}
+  .tag-project{background:#ffedd5;color:#9a3412}
+  .tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:14px 18px;margin:14px 0;font-size:.95rem}
+  .tip strong{color:var(--primary-dark)}
+  .warn{background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:14px 18px;margin:14px 0}
+  .warn strong{color:var(--warning)}
+  .checklist{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin:16px 0}
+  .checklist li{list-style:none;padding:6px 0;padding-left:28px;position:relative}
+  .checklist li::before{content:"☐";position:absolute;left:0;color:var(--primary);font-weight:700}
+  .nav{position:sticky;top:0;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:12px 0;z-index:50}
+  .nav-inner{max-width:1100px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;padding:0 24px}
+  .nav a{text-decoration:none;color:var(--text-secondary);font-size:.85rem;padding:6px 12px;border-radius:6px;transition:.2s}
+  .nav a:hover{background:var(--bg);color:var(--primary)}
+  .template-box{background:#f8fafc;border:2px dashed var(--border);border-radius:12px;padding:20px;margin:16px 0;font-family:monospace;white-space:pre-wrap;font-size:.88rem}
+  .progress-bar{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden;margin:8px 0}
+  .progress-fill{height:100%;background:var(--success);border-radius:4px}
+  footer{text-align:center;padding:40px 24px;color:var(--text-secondary);font-size:.9rem}
+  @media(max-width:768px){.container{padding:16px}header h1{font-size:1.6rem}table{font-size:.82rem}th,td{padding:8px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner">
+<a href="#overview">概览</a>
+<a href="#w1">第1周</a><a href="#w2">第2周</a><a href="#w3">第3周</a><a href="#w4">第4周</a>
+<a href="#w5">第5周</a><a href="#w6">第6周</a><a href="#w7">第7周</a><a href="#w8">第8周</a>
+<a href="#buffer">缓冲期</a><a href="#check">验收</a><a href="#pitfalls">陷阱</a>
+<a href="#templates">模板</a><a href="#interview">面试</a><a href="#resources">资源</a>
+</div></nav>
+
+<div class="container">
+
+<header>
+<h1>60天Java全栈转型实战计划</h1>
+<p>面向前端工程师与测试工程师的精准转型路线图 · 精确到每一天 · 附完整代码示例</p>
+<div>
+<span class="badge">Spring Boot</span>
+<span class="badge">Vue/React</span>
+<span class="badge">MySQL</span>
+<span class="badge">Docker</span>
+<span class="badge">AI辅助</span>
+</div>
+</header>
+
+<section id="overview" class="intro">
+<h2>计划概览与学习契约</h2>
+<p>本计划共<strong>8周（56天）核心学习 + 6天缓冲</strong>，总计62天。假设学员为在职状态，每日投入<strong>3~4小时新知识 + 2小时编码实践</strong>，周末投入<strong>6~8小时</strong>完成周项目。</p>
+
+<h3>四阶段里程碑</h3>
+<table>
+<tr><th>阶段</th><th>周期</th><th>核心目标</th><th>产出物</th></tr>
+<tr><td>Java核心筑基</td><td>第1~3周</td><td>精通Java语法、OOP、集合、Stream、异常</td><td>3个命令行项目</td></tr>
+<tr><td>数据与工程化</td><td>第4周</td><td>MySQL、JDBC、Maven、Git、IO、多线程</td><td>文件处理器+多线程下载器</td></tr>
+<tr><td>Spring Boot开发</td><td>第5~6周</td><td>Spring Boot、JPA/MyBatis、RESTful、Security、测试</td><td>博客系统API+权限系统</td></tr>
+<tr><td>全栈贯通与毕业</td><td>第7~8周</td><td>Redis、前端对接、Docker、全栈项目</td><td>全栈毕业项目+部署</td></tr>
+</table>
+
+<h3>前端工程师 vs 测试工程师 差异路径</h3>
+<p><span class="tag tag-fe">前端侧重</span> 在Web阶段可加速（HTTP/JS已熟悉），重点补足Java类型系统、OOP思维、JVM内存模型；前端框架经验可直接复用到Vue/React联调环节，建议作为项目前端负责人。</p>
+<p><span class="tag tag-qa">测试侧重</span> SQL和接口测试经验是巨大优势，在JDBC、JPA、JUnit章节可快速上手；重点补足面向对象设计能力（从"测代码"到"写代码"的思维转换），以及前端工程化（npm/webpack）的基础认知。</p>
+
+<h3>AI工具使用契约（第1天起生效）</h3>
+<div class="tip">
+<strong>允许</strong>：用ChatGPT解释报错信息、生成JUnit测试用例、将自然语言需求转为代码骨架、解释JVM异常日志、生成Mock数据。<br>
+<strong>禁止</strong>：直接复制不理解的代码到生产环境、用AI替代手动调试、跳过源码阅读环节。<br>
+<strong>黄金法则</strong>：AI生成每一行代码后，必须能用自己的话解释其工作原理，并在IDE中逐行Debug验证。
+</div>
+
+<h3>时间弹性调整建议</h3>
+<div class="warn">
+若某日加班只能学习1小时：优先完成<strong>当日代码示例的手敲</strong>（不复制粘贴），理论知识可顺延至次日；若连续3天无法达标，建议暂停当前周项目，先确保每日基础知识点不漏项。周末可补平日的理论学习。
+</div>
+</section>
+
+<!-- ==================== 第1周 ==================== -->
+<section id="w1" class="week-card">
+<div class="week-header"><h3>第1周：Java筑基与AI工具入门</h3><span>目标：写出第一个可运行的Java类</span></div>
+<div class="week-body">
+
+<table>
+<tr><th>日期</th><th>天数</th><th>学习内容</th><th>示例主题</th><th>练习任务</th></tr>
+<tr>
+<td>第1天</td><td>D1</td>
+<td>Java简介、JDK 17安装、IDEA配置、第一个Java程序、AI辅助学习入门</td>
+<td>HelloWorld与AI解释报错</td>
+<td>安装环境并运行3个不同包下的HelloWorld</td>
+</tr>
+<tr>
+<td>第2天</td><td>D2</td>
+<td>变量与数据类型（8种基本类型、引用类型）、类型转换、包装类、输入输出</td>
+<td>用户信息录入与类型转换</td>
+<td>编写命令行用户注册程序，处理年龄/收入输入异常</td>
+</tr>
+<tr>
+<td>第3天</td><td>D3</td>
+<td>运算符（算术/比较/逻辑/位运算/三元）、运算符优先级、Math类</td>
+<td>购物车金额计算器</td>
+<td>实现支持折扣、税费、满减的订单价格计算器</td>
+</tr>
+<tr>
+<td>第4天</td><td>D4</td>
+<td>流程控制：if-else、switch（含Java 12+箭头语法）、for、while、do-while、break/continue/return</td>
+<td>会员等级判定与菜单循环</td>
+<td>实现命令行ATM菜单系统（循环+分支）</td>
+</tr>
+<tr>
+<td>第5天</td><td>D5</td>
+<td>数组：一维/多维数组、Arrays工具类、for-each循环；String不可变性、StringBuilder、StringBuffer</td>
+<td>学生成绩统计与报表生成</td>
+<td>实现班级成绩分析：平均分、最高分、排序</td>
+</tr>
+<tr>
+<td>第6天</td><td>D6</td>
+<td>Java核心类：包装类深入（自动装箱拆箱）、BigDecimal精确计算、LocalDate/LocalTime日期时间、Random</td>
+<td>银行利息计算与日期处理</td>
+<td>实现定期存款到期日计算器，用BigDecimal精确计算复利</td>
+</tr>
+<tr>
+<td>第7天</td><td>D7</td>
+<td><strong>周项目</strong>：命令行通讯录管理系统</td>
+<td>增删改查+文件持久化初探</td>
+<td>完成项目并提交Git</td>
+</tr>
+</table>
+
+<div class="day-section">
+<div class="day-title">第1天（D1）：环境搭建与第一个Java程序</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-ai">AI工具</span> <span class="tag tag-fe">前端：对比Node/npm</span> <span class="tag tag-qa">测试：对比Python环境</span></div>
+
+<h4>知识点</h4>
+<p>JDK（Java Development Kit）包含<strong>JRE</strong>（运行时）和开发工具。Java程序先编译为<strong>字节码</strong>（.class），再由<strong>JVM</strong>解释执行，实现"一次编写，到处运行"。</p>
+<p>推荐安装<strong>JDK 17 LTS</strong>（Oracle OpenJDK或Eclipse Temurin）。IDE使用<strong>IntelliJ IDEA Community Edition</strong>（免费且功能足够）。</p>
+
+<h4>AI工具今日任务</h4>
+<p>向ChatGPT提问："我在IDEA中运行Java程序时报错'java: 程序包java.util不存在'，可能的原因有哪些？"记录AI给出的排查清单，并在自己电脑上验证每一项。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">// HelloWorld.java - 第一个Java程序
+package com.example.day01;
+
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java全栈转型!");
+        
+        // 读取命令行参数
+        if (args.length > 0) {
+            System.out.println("欢迎, " + args[0] + "!");
+        }
+        
+        // 打印JVM信息
+        System.out.println("Java版本: " + System.getProperty("java.version"));
+        System.out.println("JVM名称: " + System.getProperty("java.vm.name"));
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>安装JDK 17，配置 <code>JAVA_HOME</code> 和 <code>PATH</code>。</li>
+<li>安装IntelliJ IDEA，配置JDK路径。</li>
+<li>创建3个不同包名的类（如 <code>com.example.a.Hello</code>, <code>com.example.b.Hello</code>），体会包的作用。</li>
+<li>用命令行 <code>javac</code> 和 <code>java</code> 手动编译运行一次，理解IDE的自动化。</li>
+</ol>
+
+<div class="warn">
+<strong>环境排查备忘</strong>：若<code>java -version</code>提示"不是内部命令"，检查PATH是否包含<code>%JAVA_HOME%\bin</code>；若IDEA找不到JDK，检查Project Structure -> SDKs配置。
+</div>
+</div>
+
+<div class="day-section">
+<div class="day-title">第2天（D2）：变量、数据类型与包装类</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-fe">前端：对比JS弱类型</span> <span class="tag tag-qa">测试：对比Python类型</span></div>
+
+<h4>知识点</h4>
+<p>Java是<strong>强类型静态语言</strong>。8种基本类型：<code>byte/short/int/long/float/double/char/boolean</strong>。引用类型包括类、接口、数组。自动装箱（autoboxing）将<code>int</code>转为<code>Integer</code>，但频繁装箱有性能损耗。类型转换分为自动（小→大）和强制（大→小，可能丢失精度）。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.day02;
+
+import java.math.BigDecimal;
+import java.util.Scanner;
+
+public class UserRegister {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("用户名: ");
+        String username = scanner.nextLine();
+        
+        System.out.print("年龄: ");
+        // 测试侧重：这里可能抛出InputMismatchException
+        int age = scanner.nextInt();
+        
+        System.out.print("月收入: ");
+        double income = scanner.nextDouble();
+        
+        // 使用BigDecimal精确计算年薪
+        BigDecimal monthly = BigDecimal.valueOf(income);
+        BigDecimal yearly = monthly.multiply(BigDecimal.valueOf(12));
+        
+        // 包装类与自动装箱
+        Integer ageObj = age; // 自动装箱
+        int agePrimitive = ageObj; // 自动拆箱
+        
+        System.out.println("===== 注册信息 =====");
+        System.out.println("用户: " + username);
+        System.out.println("年龄: " + agePrimitive);
+        System.out.println("年薪: " + yearly.setScale(2, BigDecimal.ROUND_HALF_UP));
+        
+        scanner.close();
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>用命令行Scanner实现一个简单的BMI计算器，输入身高体重，输出BMI值和健康建议。</li>
+<li>比较 <code>double</code> 和 <code>BigDecimal</code> 在计算 <code>0.1 + 0.2</code> 时的差异。</li>
+<li>写一段代码证明 <code>Integer</code> 缓存范围（-128~127）的陷阱：<code>Integer a=100,b=100; System.out.println(a==b);</code> 再试1000。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第3天（D3）：运算符与优先级</div>
+<div class="day-meta">预计2.5h理论 + 2.5h实践</div>
+
+<h4>知识点</h4>
+<p>算术运算符 <code>+ - * / %</code>；比较运算符 <code>== != > < >= <=</code>；逻辑运算符 <code>&& || !</code>（注意短路特性）；位运算符 <code>& | ^ ~ << >></code>；三元运算符 <code>条件 ? 值1 : 值2</code>。<strong>优先级</strong>从高到低：括号 > 一元 > 算术 > 移位 > 比较 > 逻辑 > 三元 > 赋值。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.day03;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+public class OrderCalculator {
+    
+    public static void main(String[] args) {
+        BigDecimal price = new BigDecimal("299.99");
+        int quantity = 3;
+        double discountRate = 0.85; // 85折
+        BigDecimal taxRate = new BigDecimal("0.13"); // 13%税
+        BigDecimal threshold = new BigDecimal("500"); // 满减门槛
+        BigDecimal reduction = new BigDecimal("50"); // 满减金额
+        
+        // 计算小计
+        BigDecimal subtotal = price.multiply(BigDecimal.valueOf(quantity));
+        
+        // 应用折扣
+        BigDecimal discounted = subtotal.multiply(BigDecimal.valueOf(discountRate))
+                                        .setScale(2, RoundingMode.HALF_UP);
+        
+        // 满减（三元运算符+逻辑判断）
+        BigDecimal afterReduction = discounted.compareTo(threshold) >= 0
+                ? discounted.subtract(reduction)
+                : discounted;
+        
+        // 税费
+        BigDecimal tax = afterReduction.multiply(taxRate).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal total = afterReduction.add(tax);
+        
+        System.out.println("原价: " + subtotal);
+        System.out.println("折扣后: " + discounted);
+        System.out.println("满减后: " + afterReduction);
+        System.out.println("税费: " + tax);
+        System.out.println("应付总额: " + total);
+        
+        // 短路验证
+        System.out.println("短路测试: " + (false && (++quantity > 0))); // quantity不变
+        System.out.println("quantity仍为: " + quantity);
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>实现一个支持多级折扣的订单计算器：VIP等级→不同折扣率，叠加满减和优惠券。</li>
+<li>用位运算实现权限系统（读=1,写=2,执行=4），实现权限添加、删除、判断功能。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第4天（D4）：流程控制全解</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-fe">前端：对比JS switch的break穿透</span></div>
+
+<h4>知识点</h4>
+<p><code>if-else</code> 嵌套不超过3层为宜。<code>switch</code> 在Java 12+支持箭头语法（无需break），支持 <code>yield</code> 返回值。<code>for</code> 循环三种形式：计数for、条件while、集合for-each。<code>break</code> 跳出当前循环，<code>continue</code> 跳过本次迭代，带标签的 <code>break label;</code> 可跳出多层循环。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.day04;
+
+import java.util.Scanner;
+
+public class ATMSystem {
+    private static double balance = 1000.0;
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        boolean running = true;
+        
+        while (running) {
+            System.out.println("\n=== ATM系统 ===");
+            System.out.println("1.查询余额 2.存款 3.取款 4.退出");
+            System.out.print("请选择: ");
+            int choice = sc.nextInt();
+            
+            switch (choice) {
+                case 1 -> System.out.println("余额: " + balance);
+                case 2 -> {
+                    System.out.print("存款金额: ");
+                    double amount = sc.nextDouble();
+                    if (amount > 0) {
+                        balance += amount;
+                        System.out.println("存款成功");
+                    } else {
+                        System.out.println("金额无效");
+                    }
+                }
+                case 3 -> {
+                    System.out.print("取款金额: ");
+                    double amount = sc.nextDouble();
+                    if (amount > 0 && amount <= balance) {
+                        balance -= amount;
+                        System.out.println("取款成功");
+                    } else {
+                        System.out.println("余额不足或金额无效");
+                    }
+                }
+                case 4 -> {
+                    System.out.println("感谢使用，再见！");
+                    running = false;
+                }
+                default -> System.out.println("无效选项");
+            }
+        }
+        sc.close();
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>用带标签的break实现九九乘法表，在乘积大于20时跳出外层循环。</li>
+<li>实现猜数字游戏（1-100），记录猜测次数并给出"太大/太小"提示。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第5天（D5）：数组与字符串深入</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p>数组是引用类型，长度固定。声明方式 <code>int[] arr = new int[5];</code> 或 <code>int[] arr = {1,2,3};</code>。<code>String</code> 是<strong>不可变对象</strong>（final char[]），频繁拼接应使用 <code>StringBuilder</code>（线程不安全）或 <code>StringBuffer</code>（线程安全）。<code>String.intern()</code> 可将字符串放入常量池。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.day05;
+
+import java.util.Arrays;
+
+public class StudentScore {
+    public static void main(String[] args) {
+        String[] names = {"张三", "李四", "王五", "赵六", "孙七"};
+        int[][] scores = {
+            {85, 92, 78},  // 语文、数学、英语
+            {90, 88, 95},
+            {72, 85, 80},
+            {95, 96, 94},
+            {60, 65, 70}
+        };
+        
+        System.out.println("===== 成绩报表 =====");
+        System.out.printf("%-6s %-6s %-6s %-6s %-6s\n", "姓名", "语文", "数学", "英语", "平均");
+        
+        for (int i = 0; i < names.length; i++) {
+            int sum = 0;
+            for (int score : scores[i]) {
+                sum += score;
+            }
+            double avg = (double) sum / scores[i].length;
+            System.out.printf("%-6s %-6d %-6d %-6d %-6.1f\n",
+                names[i], scores[i][0], scores[i][1], scores[i][2], avg);
+        }
+        
+        // 找出每科最高分
+        for (int col = 0; col < 3; col++) {
+            int max = 0;
+            String topStudent = "";
+            for (int row = 0; row < scores.length; row++) {
+                if (scores[row][col] > max) {
+                    max = scores[row][col];
+                    topStudent = names[row];
+                }
+            }
+            String[] subjects = {"语文", "数学", "英语"};
+            System.out.println(subjects[col] + "最高分: " + topStudent + " " + max);
+        }
+        
+        // StringBuilder示例：生成CSV
+        StringBuilder csv = new StringBuilder();
+        csv.append("姓名,语文,数学,英语\n");
+        for (int i = 0; i < names.length; i++) {
+            csv.append(names[i]).append(",")
+               .append(scores[i][0]).append(",")
+               .append(scores[i][1]).append(",")
+               .append(scores[i][2]).append("\n");
+        }
+        System.out.println("\nCSV格式:\n" + csv);
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>实现数组冒泡排序和二分查找。</li>
+<li>用StringBuilder生成一段JSON字符串（模拟API响应）。</li>
+<li>对比 <code>String +=</code> 和 <code>StringBuilder.append</code> 在循环10000次时的性能差异。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第6天（D6）：Java核心类与精确计算</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-qa">测试：关注BigDecimal精度问题</span></div>
+
+<h4>知识点</h4>
+<p><code>BigDecimal</code> 必须用 <code>String</code> 构造（避免 <code>double</code> 精度问题）。<code>LocalDate</code>/<code>LocalTime</code>/<code>LocalDateTime</code> 是Java 8引入的不可变日期API，替代 <code>Date</code> 和 <code>Calendar</code>。格式化使用 <code>DateTimeFormatter</code>。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.day06;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
+public class BankDeposit {
+    public static void main(String[] args) {
+        BigDecimal principal = new BigDecimal("100000"); // 本金10万
+        BigDecimal annualRate = new BigDecimal("0.035"); // 年利率3.5%
+        int years = 3;
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = startDate.plusYears(years);
+        
+        // 复利计算: A = P * (1 + r)^n
+        BigDecimal multiplier = BigDecimal.ONE.add(annualRate);
+        BigDecimal amount = principal;
+        for (int i = 0; i < years; i++) {
+            amount = amount.multiply(multiplier);
+        }
+        amount = amount.setScale(2, RoundingMode.HALF_UP);
+        BigDecimal interest = amount.subtract(principal);
+        
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy年MM月dd日");
+        
+        System.out.println("存款计算器");
+        System.out.println("本金: " + principal);
+        System.out.println("年利率: " + annualRate.multiply(new BigDecimal("100")) + "%");
+        System.out.println("存期: " + years + "年");
+        System.out.println("存入日期: " + startDate.format(fmt));
+        System.out.println("到期日期: " + endDate.format(fmt));
+        System.out.println("到期本息: " + amount);
+        System.out.println("利息收入: " + interest);
+        System.out.println("距今天数: " + ChronoUnit.DAYS.between(startDate, endDate));
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>实现一个贷款月供计算器（等额本息公式）。</li>
+<li>生成未来30天的日期列表，并标注出哪些是周末。</li>
+<li>比较 <code>new BigDecimal(0.1)</code> 和 <code>new BigDecimal("0.1")</code> 的输出差异，理解原因。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第7天（D7）：周项目 — 命令行通讯录管理系统</div>
+<div class="day-meta">预计6h实践 | <span class="tag tag-project">周项目</span></div>
+
+<h4>项目需求</h4>
+<p>实现一个基于命令行的通讯录，支持添加联系人（姓名、电话、邮箱、分组）、删除、查找、列出所有联系人。使用数组或ArrayList存储，用Scanner交互，要求输入校验（手机号11位数字、邮箱含@）。</p>
+
+<h4>代码骨架</h4>
+<pre><code class="java">package com.example.week1;
+
+import java.util.Scanner;
+import java.util.ArrayList;
+
+class Contact {
+    String name;
+    String phone;
+    String email;
+    String group; // 家人/朋友/同事
+    
+    Contact(String name, String phone, String email, String group) {
+        this.name = name; this.phone = phone;
+        this.email = email; this.group = group;
+    }
+    
+    boolean isValidPhone() {
+        return phone != null && phone.matches("1[3-9]\\d{9}");
+    }
+}
+
+public class ContactManager {
+    static ArrayList&lt;Contact&gt; contacts = new ArrayList&lt;&gt;();
+    static Scanner sc = new Scanner(System.in);
+    
+    public static void main(String[] args) {
+        // TODO: 实现菜单循环和CRUD
+    }
+}
+</code></pre>
+
+<div class="checklist">
+<h4>验收标准</h4>
+<ul>
+<li>能正确添加、删除、查询、列出联系人</li>
+<li>手机号和邮箱格式校验通过</li>
+<li>代码使用包组织和注释</li>
+<li>Git提交至少3次（初始/功能/修复）</li>
+</ul>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ==================== 第3周 ==================== -->
+<section id="w3" class="week-card">
+<div class="week-header"><h3>第3周：异常、泛型、集合与Stream</h3><span>目标：掌握生产级错误处理与函数式编程</span></div>
+<div class="week-body">
+
+<table>
+<tr><th>日期</th><th>天数</th><th>学习内容</th><th>示例主题</th><th>练习任务</th></tr>
+<tr>
+<td>第15天</td><td>D15</td>
+<td>异常体系：受检vs非受检、try-catch-finally、多重catch、try-with-resources</td>
+<td>文件读取异常处理</td>
+<td>为第7天通讯录添加全局异常处理</td>
+</tr>
+<tr>
+<td>第16天</td><td>D16</td>
+<td>抛出异常、自定义异常、异常链、日志框架（JDK Logging/SLF4J+Logback）</td>
+<td>业务异常分层设计</td>
+<td>实现OrderNotFoundException等自定义异常</td>
+</tr>
+<tr>
+<td>第17天</td><td>D17</td>
+<td>泛型基础：泛型类/方法、类型擦除、通配符? extends/super、PECS原则</td>
+<td>泛型Repository与DTO</td>
+<td>实现泛型分页结果类PageResult&lt;T&gt;</td>
+</tr>
+<tr>
+<td>第18天</td><td>D18</td>
+<td>List深入：ArrayList扩容机制源码、LinkedList双向链表、Vector与Stack</td>
+<td>购物车商品列表优化</td>
+<td>模拟ArrayList手写实现MyArrayList</td>
+</tr>
+<tr>
+<td>第19天</td><td>D19</td>
+<td>Map深入：HashMap哈希表+红黑树源码、LinkedHashMap、TreeMap、Set实现</td>
+<td>用户会话缓存设计</td>
+<td>手写简化版HashMap（数组+链表）</td>
+</tr>
+<tr>
+<td>第20天</td><td>D20</td>
+<td>Lambda表达式、函数式接口（Consumer/Supplier/Function/Predicate）、方法引用</td>
+<td>列表过滤与转换</td>
+<td>用Lambda重构第7天通讯录的查询逻辑</td>
+</tr>
+<tr>
+<td>第21天</td><td>D21</td>
+<td><strong>三周综合项目</strong>：学生成绩管理系统（异常+集合+Stream+文件IO）</td>
+<td>完整CRUD+报表导出</td>
+<td>完成项目并提交Git</td>
+</tr>
+</table>
+
+<div class="day-section">
+<div class="day-title">第15天（D15）：异常处理全解</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-qa">测试：从"发现异常"到"设计异常"</span></div>
+
+<h4>知识点</h4>
+<p><strong>Throwable</strong> 分为 <strong>Error</strong>（严重问题，不处理）和 <strong>Exception</strong>。<strong>受检异常（Checked）</strong>必须显式处理或声明，如 <code>IOException</code>；<strong>非受检异常（Unchecked）</strong>继承 <code>RuntimeException</code>，如 <code>NullPointerException</code>。<code>try-with-resources</code> 自动关闭实现 <code>AutoCloseable</code> 的资源。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.day15;
+
+import java.io.*;
+
+public class ExceptionHandling {
+    
+    public static String readConfig(String path) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+            return sb.toString();
+        }
+    }
+    
+    public static int parseAge(String input) {
+        try {
+            int age = Integer.parseInt(input);
+            if (age &lt; 0 || age &gt; 150) {
+                throw new IllegalArgumentException("年龄必须在0-150之间");
+            }
+            return age;
+        } catch (NumberFormatException e) {
+            System.err.println("输入格式错误: " + e.getMessage());
+            return -1;
+        } catch (IllegalArgumentException e) {
+            System.err.println("业务校验失败: " + e.getMessage());
+            return -1;
+        } finally {
+            System.out.println("parseAge执行完成");
+        }
+    }
+    
+    public static void process() {
+        try {
+            riskyOperation();
+        } catch (FileNotFoundException | IllegalStateException e) {
+            System.out.println("可恢复异常: " + e.getClass().getSimpleName());
+        }
+    }
+    
+    static void riskyOperation() throws FileNotFoundException {
+        if (System.currentTimeMillis() % 2 == 0) {
+            throw new FileNotFoundException("文件不存在");
+        }
+    }
+    
+    public static void main(String[] args) {
+        System.out.println("年龄解析: " + parseAge("abc"));
+        System.out.println("年龄解析: " + parseAge("200"));
+        System.out.println("年龄解析: " + parseAge("25"));
+        
+        try {
+            System.out.println(readConfig("nonexistent.txt"));
+        } catch (IOException e) {
+            System.out.println("读取失败，使用默认配置");
+        }
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>为通讯录的添加联系人方法添加参数校验异常。</li>
+<li>写一段代码演示 finally 块在 return 语句后仍会执行。</li>
+<li>比较 try-catch-finally 与 try-with-resources 的代码简洁性差异。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第16天（D16）：自定义异常与日志</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p>自定义异常应继承 <code>Exception</code>（受检）或 <code>RuntimeException</code>（非受检）。业务异常建议用非受检异常。<strong>异常链</strong>通过 <code>new MyException("msg", cause)</code> 保留原始堆栈。<strong>SLF4J</strong>是日志门面，<strong>Logback</strong>是具体实现。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.day16;
+
+class BusinessException extends RuntimeException {
+    private final int errorCode;
+    
+    BusinessException(int code, String message) {
+        super(message);
+        this.errorCode = code;
+    }
+    
+    BusinessException(int code, String message, Throwable cause) {
+        super(message, cause);
+        this.errorCode = code;
+    }
+    
+    public int getErrorCode() { return errorCode; }
+}
+
+class OrderNotFoundException extends BusinessException {
+    OrderNotFoundException(Long orderId) {
+        super(1001, "订单不存在: " + orderId);
+    }
+}
+
+class InsufficientStockException extends BusinessException {
+    InsufficientStockException(String product, int need, int actual) {
+        super(1002, String.format("商品[%s]库存不足,需%d,实有%d", product, need, actual));
+    }
+}
+
+class OrderService {
+    void payOrder(Long orderId) {
+        try {
+            validateOrder(orderId);
+            deductStock(orderId);
+        } catch (IllegalStateException e) {
+            throw new BusinessException(2001, "支付失败", e);
+        }
+    }
+    
+    private void validateOrder(Long id) {
+        if (id == null || id &lt;= 0) {
+            throw new OrderNotFoundException(id);
+        }
+    }
+    
+    private void deductStock(Long id) {
+        throw new InsufficientStockException("iPhone15", 10, 3);
+    }
+}
+
+public class CustomExceptionDemo {
+    public static void main(String[] args) {
+        OrderService service = new OrderService();
+        try {
+            service.payOrder(12345L);
+        } catch (BusinessException e) {
+            System.err.println("错误码: " + e.getErrorCode());
+            System.err.println("消息: " + e.getMessage());
+            if (e.getCause() != null) {
+                System.err.println("原始异常: " + e.getCause().getClass().getSimpleName());
+            }
+        }
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>为银行账户系统设计3层异常：参数异常、业务异常、系统异常。</li>
+<li>配置Logback（logback.xml），让INFO日志输出到控制台，ERROR日志输出到文件。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第17天（D17）：泛型深入</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p><strong>类型擦除</strong>：泛型在编译后变为Object（或边界类型），JVM运行时无泛型信息。<strong>PECS原则</strong>：Producer Extends, Consumer Super。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.day17;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class PageResult&lt;T&gt; {
+    private List&lt;T&gt; data;
+    private int pageNum;
+    private int pageSize;
+    private long total;
+    
+    PageResult(List&lt;T&gt; data, int pageNum, int pageSize, long total) {
+        this.data = data; this.pageNum = pageNum;
+        this.pageSize = pageSize; this.total = total;
+    }
+    
+    public List&lt;T&gt; getData() { return data; }
+    public int getTotalPages() {
+        return (int) Math.ceil((double) total / pageSize);
+    }
+    
+    public static &lt;E&gt; PageResult&lt;E&gt; empty(int pageSize) {
+        return new PageResult&lt;&gt;(new ArrayList&lt;&gt;(), 1, pageSize, 0);
+    }
+}
+
+public class GenericDemo {
+    static double sumOfList(List&lt;? extends Number&gt; list) {
+        double sum = 0;
+        for (Number n : list) sum += n.doubleValue();
+        return sum;
+    }
+    
+    static void addIntegers(List&lt;? super Integer&gt; list) {
+        list.add(100); list.add(200);
+    }
+    
+    public static void main(String[] args) {
+        List&lt;Integer&gt; ints = List.of(1, 2, 3);
+        List&lt;Double&gt; doubles = List.of(1.5, 2.5);
+        System.out.println("整数和: " + sumOfList(ints));
+        System.out.println("浮点和: " + sumOfList(doubles));
+        
+        List&lt;Number&gt; numbers = new ArrayList&lt;&gt;();
+        addIntegers(numbers);
+        System.out.println("写入后: " + numbers);
+        
+        PageResult&lt;String&gt; page = PageResult.empty(10);
+        System.out.println("空分页总页数: " + page.getTotalPages());
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>实现泛型工具类 <code>Pair&lt;K, V&gt;</code>。</li>
+<li>解释为什么 <code>List&lt;Integer&gt;</code> 不是 <code>List&lt;Number&gt;</code> 的子类型。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第18天（D18）：List源码与性能</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p><strong>ArrayList</strong>底层是Object数组，默认容量10，扩容为1.5倍。<strong>LinkedList</strong>是双向链表，插入删除O(1)，查询O(n)。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.day18;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class ListPerformance {
+    public static void main(String[] args) {
+        int n = 100000;
+        
+        List&lt;Integer&gt; arrayList = new ArrayList&lt;&gt;();
+        long start = System.currentTimeMillis();
+        for (int i = 0; i &lt; n; i++) arrayList.add(i);
+        System.out.println("ArrayList add尾部: " + (System.currentTimeMillis() - start) + "ms");
+        
+        List&lt;Integer&gt; linkedList = new LinkedList&lt;&gt;();
+        start = System.currentTimeMillis();
+        for (int i = 0; i &lt; n; i++) linkedList.add(i);
+        System.out.println("LinkedList add尾部: " + (System.currentTimeMillis() - start) + "ms");
+        
+        List&lt;Integer&gt; al2 = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; 10000; i++) al2.add(i);
+        start = System.currentTimeMillis();
+        for (int i = 0; i &lt; 1000; i++) al2.add(5000, i);
+        System.out.println("ArrayList 中间插入: " + (System.currentTimeMillis() - start) + "ms");
+        
+        List&lt;Integer&gt; ll2 = new LinkedList&lt;&gt;();
+        for (int i = 0; i &lt; 10000; i++) ll2.add(i);
+        start = System.currentTimeMillis();
+        for (int i = 0; i &lt; 1000; i++) ll2.add(5000, i);
+        System.out.println("LinkedList 中间插入: " + (System.currentTimeMillis() - start) + "ms");
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>手写简化版MyArrayList，实现add/get/size方法。</li>
+<li>用Iterator安全删除元素。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第19天（D19）：HashMap与Set</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-fe">前端：对比JS Map/Set</span></div>
+
+<h4>知识点</h4>
+<p><strong>HashMap</strong>底层是数组+链表+红黑树（Java 8+）。当链表长度≥8且数组长度≥64时转红黑树。<code>hashCode()</code>决定桶位置，<code>equals()</code>决定键是否相等。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.day19;
+
+import java.util.*;
+
+public class MapDemo {
+    public static void main(String[] args) {
+        Map&lt;String, Integer&gt; scores = new HashMap&lt;&gt;();
+        scores.put("张三", 90); scores.put("李四", 85); scores.put("王五", 92);
+        
+        scores.forEach((k, v) -> System.out.println(k + " -> " + v));
+        
+        scores.computeIfAbsent("赵六", k -> 88);
+        scores.merge("张三", 5, Integer::sum);
+        
+        Map&lt;String, String&gt; cache = new LinkedHashMap&lt;&gt;(16, 0.75f, true) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry&lt;String, String&gt; eldest) {
+                return size() &gt; 3;
+            }
+        };
+        cache.put("A", "1"); cache.put("B", "2");
+        cache.put("C", "3"); cache.get("A");
+        cache.put("D", "4");
+        System.out.println("LRU缓存: " + cache.keySet());
+        
+        Set&lt;String&gt; tags = new HashSet&lt;&gt;(List.of("java", "spring", "java"));
+        System.out.println("去重后标签: " + tags);
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>手写简化版MyHashMap（数组+链表）。</li>
+<li>用HashMap统计一段文本中每个单词出现的次数。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第20天（D20）：Lambda与函数式接口</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-fe">前端：对比JS箭头函数</span></div>
+
+<h4>知识点</h4>
+<p><strong>Lambda</strong>语法：<code>(参数) -> { 体 }</code>。核心函数式接口：<code>Consumer&lt;T&gt;</code>、<code>Supplier&lt;T&gt;</code>、<code>Function&lt;T,R&gt;</code>、<code>Predicate&lt;T&gt;</code>。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.day20;
+
+import java.util.*;
+import java.util.function.*;
+
+class Product {
+    String name; double price; String category; int stock;
+    Product(String n, double p, String c, int s) { name=n; price=p; category=c; stock=s; }
+    public String toString() { return name + "(" + price + ")"; }
+    String getName() { return name; }
+}
+
+public class LambdaDemo {
+    public static void main(String[] args) {
+        List&lt;Product&gt; products = Arrays.asList(
+            new Product("iPhone", 6999, "手机", 100),
+            new Product("MacBook", 12999, "电脑", 50),
+            new Product("AirPods", 1999, "配件", 200),
+            new Product("iPad", 4999, "平板", 80)
+        );
+        
+        Predicate&lt;Product&gt; expensive = p -> p.price &gt; 5000;
+        products.stream().filter(expensive).forEach(System.out::println);
+        
+        Supplier&lt;Product&gt; defaultProduct = () -> new Product("默认商品", 0, "其他", 0);
+        System.out.println("默认: " + defaultProduct.get());
+        
+        products.stream()
+            .filter(p -> p.stock &gt; 50)
+            .sorted(Comparator.comparingDouble(p -> p.price))
+            .limit(2)
+            .forEach(System.out::println);
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>用Lambda实现Comparator，按商品价格降序排列。</li>
+<li>用Predicate组合（and/or/negate）实现复合查询条件。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第21天（D21）：三周综合项目 — 学生成绩管理系统</div>
+<div class="day-meta">预计6-8h实践 | <span class="tag tag-project">综合项目</span></div>
+
+<h4>项目需求</h4>
+<p>综合运用前三周所学：学生类（id/name/班级）、课程类、成绩类。支持增删改查学生、录入成绩、按课程/班级统计平均分、用Stream生成成绩排名报表、导出CSV文件。要求使用自定义异常处理非法输入，泛型分页展示结果。</p>
+
+<h4>核心代码骨架</h4>
+<pre><code class="java">package com.example.week3;
+
+import java.util.*;
+import java.util.stream.*;
+
+class Student {
+    Long id; String name; String clazz;
+    Student(Long id, String name, String clazz) {
+        this.id = id; this.name = name; this.clazz = clazz;
+    }
+}
+
+class Score {
+    Long studentId; String course; Integer point;
+    Score(Long sid, String course, Integer point) {
+        this.studentId = sid; this.course = course; this.point = point;
+    }
+}
+
+class ScoreService {
+    private List&lt;Student&gt; students = new ArrayList&lt;&gt;();
+    private List&lt;Score&gt; scores = new ArrayList&lt;&gt;();
+    
+    void addStudent(Student s) {
+        if (s.name == null || s.name.isBlank())
+            throw new IllegalArgumentException("姓名不能为空");
+        students.add(s);
+    }
+    
+    void addScore(Score sc) { scores.add(sc); }
+    
+    Map&lt;String, Double&gt; averageByCourse() {
+        return scores.stream()
+            .collect(Collectors.groupingBy(
+                s -> s.course,
+                Collectors.averagingInt(s -> s.point)
+            ));
+    }
+    
+    List&lt;Score&gt; findByStudent(Long sid) {
+        return scores.stream()
+            .filter(s -> s.studentId.equals(sid))
+            .collect(Collectors.toList());
+    }
+    
+    List&lt;String&gt; rankingByClazz(String clazz) {
+        Set&lt;Long&gt; ids = students.stream()
+            .filter(s -> s.clazz.equals(clazz))
+            .map(s -> s.id)
+            .collect(Collectors.toSet());
+        
+        return scores.stream()
+            .filter(s -> ids.contains(s.studentId))
+            .sorted(Comparator.comparingInt((Score s) -> s.point).reversed())
+            .map(s -> s.studentId + ":" + s.course + "=" + s.point)
+            .collect(Collectors.toList());
+    }
+}
+</code></pre>
+
+<div class="checklist">
+<h4>验收标准</h4>
+<ul>
+<li>使用ArrayList/HashMap存储数据</li>
+<li>至少3个自定义异常</li>
+<li>使用Stream完成至少2个统计功能</li>
+<li>包含泛型分页展示</li>
+<li>导出CSV功能（FileWriter）</li>
+<li>单元测试≥5个</li>
+</ul>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ==================== 第4周 ==================== -->
+<section id="w4" class="week-card">
+<div class="week-header"><h3>第4周：IO流、多线程、数据库与工程化</h3><span>目标：掌握文件操作、并发基础、SQL与构建工具</span></div>
+<div class="week-body">
+
+<table>
+<tr><th>日期</th><th>天数</th><th>学习内容</th><th>示例主题</th><th>练习任务</th></tr>
+<tr>
+<td>第22天</td><td>D22</td>
+<td>File类、InputStream/OutputStream、Reader/Writer、Buffered流、序列化与反序列化</td>
+<td>文件复制与日志持久化</td>
+<td>实现目录递归复制工具</td>
+</tr>
+<tr>
+<td>第23天</td><td>D23</td>
+<td>线程基础：Thread类/Runnable接口、线程状态、sleep/join、线程同步synchronized</td>
+<td>多线程售票系统</td>
+<td>手写线程安全的计数器</td>
+</tr>
+<tr>
+<td>第24天</td><td>D24</td>
+<td>线程池：Executor框架、ThreadPoolExecutor参数、Callable与Future、CompletableFuture</td>
+<td>批量邮件发送器</td>
+<td>用线程池处理100个文件上传</td>
+</tr>
+<tr>
+<td>第25天</td><td>D25</td>
+<td>MySQL基础：DDL/DML/DQL、数据类型、约束、索引基础、事务ACID</td>
+<td>用户/订单表设计</td>
+<td>设计电商核心表结构</td>
+</tr>
+<tr>
+<td>第26天</td><td>D26</td>
+<td>SQL进阶：JOIN、子查询、聚合函数、窗口函数、执行计划初探</td>
+<td>销售报表SQL</td>
+<td>编写10个复杂业务SQL</td>
+</tr>
+<tr>
+<td>第27天</td><td>D27</td>
+<td>Maven构建：pom.xml、依赖管理、生命周期、仓库；Git分支策略</td>
+<td>多模块项目搭建</td>
+<td>初始化Git仓库并练习分支合并</td>
+</tr>
+<tr>
+<td>第28天</td><td>D28</td>
+<td><strong>周项目</strong>：多线程文件下载器 + 文本词频统计</td>
+<td>断点续传+并发下载</td>
+<td>完成项目，Maven打包可运行jar</td>
+</tr>
+</table>
+
+<div class="day-section">
+<div class="day-title">第22天（D22）：Java IO流</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p>IO流分为<strong>字节流</strong>（InputStream/OutputStream，适合二进制）和<strong>字符流</strong>（Reader/Writer，适合文本，自动编码）。《strong>Buffered流</strong>通过减少系统调用次数提升性能。<strong>序列化</strong>将对象转为字节流，需实现 <code>Serializable</code> 接口，<code>transient</code> 字段不序列化。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.day22;
+
+import java.io.*;
+import java.nio.file.*;
+
+public class FileIO {
+    
+    // 使用Buffered流复制大文件
+    public static void copyFile(String src, String dest) throws IOException {
+        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(src));
+             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(dest))) {
+            byte[] buffer = new byte[8192];
+            int len;
+            while ((len = bis.read(buffer)) != -1) {
+                bos.write(buffer, 0, len);
+            }
+        }
+    }
+    
+    // 序列化示例：用户偏好设置
+    static class UserPreference implements Serializable {
+        private static final long serialVersionUID = 1L;
+        String theme;
+        transient String tempToken; // 不序列化
+        int fontSize;
+        
+        UserPreference(String theme, String token, int fontSize) {
+            this.theme = theme; this.tempToken = token; this.fontSize = fontSize;
+        }
+    }
+    
+    public static void main(String[] args) throws Exception {
+        // 复制文件
+        Path temp = Files.createTempFile("test", ".txt");
+        Files.writeString(temp, "Hello, Java IO!");
+        copyFile(temp.toString(), temp.toString() + ".bak");
+        System.out.println("复制完成");
+        
+        // 序列化与反序列化
+        UserPreference pref = new UserPreference("dark", "secret123", 14);
+        String serFile = "pref.ser";
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(serFile))) {
+            oos.writeObject(pref);
+        }
+        
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile))) {
+            UserPreference restored = (UserPreference) ois.readObject();
+            System.out.println("主题: " + restored.theme);
+            System.out.println("字体: " + restored.fontSize);
+            System.out.println("临时令牌: " + restored.tempToken); // null
+        }
+        
+        Files.deleteIfExists(Path.of(serFile));
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>实现递归复制目录的工具类。</li>
+<li>用Files.lines()读取大文本文件并统计行数。</li>
+<li>实现Properties文件读写（模拟配置文件加载）。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第23天（D23）：线程基础与同步</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-fe">前端：对比JS单线程事件循环</span></div>
+
+<h4>知识点</h4>
+<p>Java中创建线程两种方式：继承 <code>Thread</code> 或实现 <code>Runnable</code>（推荐）。线程状态：NEW→RUNNABLE→BLOCKED/WAITING/TIMED_WAITING→TERMINATED。<strong>synchronized</strong> 可修饰方法或代码块，底层通过monitor实现互斥。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.day23;
+
+public class ThreadSync {
+    private int tickets = 100;
+    
+    // 同步方法
+    public synchronized boolean sellTicket() {
+        if (tickets &gt; 0) {
+            System.out.println(Thread.currentThread().getName() + " 售出 " + tickets--);
+            return true;
+        }
+        return false;
+    }
+    
+    // 同步代码块（更细粒度）
+    public void sellTicketBlock() {
+        synchronized (this) {
+            if (tickets &gt; 0) {
+                System.out.println(Thread.currentThread().getName() + " 售出 " + tickets--);
+            }
+        }
+    }
+    
+    public static void main(String[] args) throws InterruptedException {
+        ThreadSync station = new ThreadSync();
+        
+        Runnable task = () -> {
+            while (station.sellTicket()) {
+                try { Thread.sleep(10); } catch (InterruptedException e) { break; }
+            }
+        };
+        
+        Thread t1 = new Thread(task, "窗口1");
+        Thread t2 = new Thread(task, "窗口2");
+        Thread t3 = new Thread(task, "窗口3");
+        
+        t1.start(); t2.start(); t3.start();
+        t1.join(); t2.join(); t3.join();
+        System.out.println("售票结束，剩余: " + station.tickets);
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>实现一个线程安全的银行账户转账类（A转给B，避免死锁）。</li>
+<li>对比synchronized方法和synchronized代码块的性能差异。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第24天（D24）：线程池与异步</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p><strong>线程池</strong>通过复用线程降低创建销毁开销。核心参数：corePoolSize、maximumPoolSize、keepAliveTime、workQueue、rejectedExecutionHandler。<strong>CompletableFuture</strong>是Java 8引入的异步编程工具，支持链式组合、异常处理、并行执行。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.day24;
+
+import java.util.concurrent.*;
+import java.util.List;
+import java.util.Arrays;
+
+public class ThreadPoolDemo {
+    public static void main(String[] args) throws Exception {
+        // 自定义线程池
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(
+            2, 4, 60L, TimeUnit.SECONDS,
+            new LinkedBlockingQueue&lt;&gt;(100),
+            new ThreadFactory() {
+                int count = 0;
+                public Thread newThread(Runnable r) {
+                    return new Thread(r, "worker-" + (++count));
+                }
+            },
+            new ThreadPoolExecutor.CallerRunsPolicy()
+        );
+        
+        // 批量提交Callable任务
+        List&lt;Future&lt;String&gt;&gt; futures = executor.invokeAll(Arrays.asList(
+            () -> { Thread.sleep(500); return "任务A完成"; },
+            () -> { Thread.sleep(300); return "任务B完成"; },
+            () -> { Thread.sleep(800); return "任务C完成"; }
+        ));
+        
+        for (Future&lt;String&gt; f : futures) {
+            System.out.println(f.get());
+        }
+        
+        // CompletableFuture异步链
+        CompletableFuture.supplyAsync(() -> fetchOrder(1001L), executor)
+            .thenApply(order -> calculatePrice(order))
+            .thenAccept(price -> System.out.println("最终价格: " + price))
+            .exceptionally(ex -> { System.err.println("错误: " + ex.getMessage()); return null; })
+            .join();
+        
+        executor.shutdown();
+    }
+    
+    static String fetchOrder(Long id) {
+        System.out.println(Thread.currentThread().getName() + " 查询订单");
+        return "Order{" + id + "}";
+    }
+    
+    static double calculatePrice(String order) {
+        return 199.99;
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>用CompletableFuture并行调用3个模拟API，汇总结果。</li>
+<li>配置拒绝策略为DiscardOldestPolicy，测试队列满时的行为。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第25天（D25）：MySQL基础与表设计</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-qa">测试：从Postman到表设计</span></div>
+
+<h4>知识点</h4>
+<p>MySQL数据类型选择原则：INT/BIGINT用于整数，DECIMAL用于金额，VARCHAR用于变长字符串，DATETIME/TIMESTAMP用于时间。<strong>主键</strong>推荐自增BIGINT或UUID。<strong>外键</strong>保证引用完整性但影响性能，生产环境常在应用层保证。<strong>索引</strong>加速查询但减慢写入。</p>
+
+<h4>可运行代码示例（SQL）</h4>
+<pre><code class="sql">-- 电商核心表设计
+CREATE DATABASE IF NOT EXISTS shop DEFAULT CHARSET=utf8mb4;
+USE shop;
+
+CREATE TABLE users (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    status TINYINT DEFAULT 1 COMMENT '0禁用 1正常',
+    INDEX idx_username (username),
+    INDEX idx_created (created_at)
+) ENGINE=InnoDB;
+
+CREATE TABLE products (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(200) NOT NULL,
+    price DECIMAL(12,2) NOT NULL,
+    stock INT NOT NULL DEFAULT 0,
+    category_id BIGINT,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_category (category_id),
+    INDEX idx_price (price)
+) ENGINE=InnoDB;
+
+CREATE TABLE orders (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    total_amount DECIMAL(12,2) NOT NULL,
+    status VARCHAR(20) DEFAULT 'PENDING',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE order_items (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    order_id BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
+    quantity INT NOT NULL,
+    unit_price DECIMAL(12,2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id)
+) ENGINE=InnoDB;
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>为电商系统添加分类表（categories）和评论表（reviews）。</li>
+<li>用EXPLAIN分析带索引和不带索引的查询差异。</li>
+<li>对比DATETIME和TIMESTAMP的存储范围与时区处理差异。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第26天（D26）：SQL进阶与性能</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p><strong>JOIN</strong>：INNER JOIN取交集，LEFT JOIN保留左表全部，RIGHT JOIN保留右表全部。<strong>子查询</strong>可分为相关子查询（慢）和非相关子查询。<strong>窗口函数</strong>（ROW_NUMBER/RANK/LAG/LEAD）在MySQL 8.0+支持。<strong>执行计划</strong>看type列：system > const > eq_ref > ref > range > index > ALL。</p>
+
+<h4>可运行代码示例（SQL）</h4>
+<pre><code class="sql">-- 查询每个用户最新订单
+SELECT o.*
+FROM orders o
+INNER JOIN (
+    SELECT user_id, MAX(created_at) AS max_time
+    FROM orders
+    GROUP BY user_id
+) latest ON o.user_id = latest.user_id AND o.created_at = latest.max_time;
+
+-- 销售排行（窗口函数）
+SELECT 
+    product_id,
+    SUM(quantity) AS total_qty,
+    RANK() OVER (ORDER BY SUM(quantity) DESC) AS sales_rank
+FROM order_items
+GROUP BY product_id;
+
+-- 用户消费分层
+SELECT 
+    u.username,
+    COUNT(o.id) AS order_count,
+    COALESCE(SUM(o.total_amount), 0) AS total_spent,
+    CASE 
+        WHEN SUM(o.total_amount) &gt; 10000 THEN 'VIP'
+        WHEN SUM(o.total_amount) &gt; 5000 THEN '高级'
+        ELSE '普通'
+    END AS level
+FROM users u
+LEFT JOIN orders o ON u.id = o.user_id
+GROUP BY u.id, u.username;
+</code></pre>
+
+<div class="tip">
+<strong>测试侧重</strong>：你之前用Postman做接口测试，现在学习将测试思维前置到表设计阶段。每张表设计时问自己：这个字段在查询时会被WHERE吗？会JOIN吗？需要唯一约束吗？
+</div>
+
+<h4>练习任务</h4>
+<ol>
+<li>编写SQL查询：找出"从未下单"的用户。</li>
+<li>编写SQL查询：统计每月销售额趋势。</li>
+<li>为users表的email字段添加唯一索引，并处理重复数据。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第27天（D27）：Maven与Git</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p><strong>Maven</strong>生命周期：validate → compile → test → package → verify → install → deploy。<strong>pom.xml</strong>声明groupId（组织）、artifactId（项目）、version（版本）。<strong>依赖范围</strong>：compile（默认）、provided（运行时容器提供）、test（仅测试）、runtime（仅运行）。<strong>Git</strong>分支策略：master/main保护分支，feature/*开发分支，hotfix/*紧急修复。</p>
+
+<h4>可运行代码示例（pom.xml）</h4>
+<pre><code class="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;com.example&lt;/groupId&gt;
+    &lt;artifactId&gt;java-learning&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    
+    &lt;properties&gt;
+        &lt;maven.compiler.source&gt;17&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;17&lt;/maven.compiler.target&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;/properties&gt;
+    
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+            &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
+            &lt;version&gt;5.10.0&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;8.0.33&lt;/version&gt;
+            &lt;scope&gt;runtime&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                &lt;version&gt;3.11.0&lt;/version&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>创建Maven项目，添加JUnit和MySQL依赖，执行mvn clean package。</li>
+<li>初始化Git仓库，创建feature/io分支，提交代码，合并到main。</li>
+<li>解决一个模拟的依赖冲突（两个库引入不同版本的commons-logging）。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第28天（D28）：周项目 — 多线程文件下载器</div>
+<div class="day-meta">预计6h实践 | <span class="tag tag-project">周项目</span></div>
+
+<h4>项目需求</h4>
+<p>实现一个命令行多线程文件下载器：输入URL和线程数，将文件分片，每个线程下载一部分，最后合并。要求显示下载进度条，支持断点续传（通过HTTP Range头）。额外任务：下载完成后用BufferedReader统计文本文件中词频最高的10个词。</p>
+
+<pre><code class="java">package com.example.week4;
+
+import java.io.*;
+import java.net.*;
+import java.util.concurrent.*;
+
+public class MultiThreadDownloader {
+    private String url;
+    private int threadCount;
+    private String outputPath;
+    
+    MultiThreadDownloader(String url, int threads, String output) {
+        this.url = url; this.threadCount = threads; this.outputPath = output;
+    }
+    
+    void download() throws Exception {
+        HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+        int totalSize = conn.getContentLength();
+        conn.disconnect();
+        
+        ExecutorService pool = Executors.newFixedThreadPool(threadCount);
+        int chunkSize = totalSize / threadCount;
+        
+        for (int i = 0; i &lt; threadCount; i++) {
+            final int index = i;
+            int start = index * chunkSize;
+            int end = (index == threadCount - 1) ? totalSize - 1 : (start + chunkSize - 1);
+            
+            pool.submit(() -> {
+                try {
+                    HttpURLConnection c = (HttpURLConnection) new URL(url).openConnection();
+                    c.setRequestProperty("Range", "bytes=" + start + "-" + end);
+                    try (InputStream in = c.getInputStream();
+                         RandomAccessFile raf = new RandomAccessFile(outputPath, "rw")) {
+                        raf.seek(start);
+                        byte[] buf = new byte[8192];
+                        int len;
+                        while ((len = in.read(buf)) != -1) {
+                            raf.write(buf, 0, len);
+                        }
+                    }
+                    System.out.println("线程" + index + "完成");
+                } catch (IOException e) {
+                    System.err.println("线程" + index + "失败: " + e.getMessage());
+                }
+            });
+        }
+        
+        pool.shutdown();
+        pool.awaitTermination(10, TimeUnit.MINUTES);
+        System.out.println("下载完成: " + outputPath);
+    }
+    
+    public static void main(String[] args) throws Exception {
+        // 用本地文件模拟
+        new MultiThreadDownloader("http://example.com/file.txt", 4, "downloaded.txt").download();
+    }
+}
+</code></pre>
+
+<div class="checklist">
+<h4>验收标准</h4>
+<ul>
+<li>多线程正确分片下载并合并文件</li>
+<li>使用线程池管理线程生命周期</li>
+<li>包含异常处理（网络中断、文件不存在）</li>
+<li>Maven打包为可运行jar（mvn package）</li>
+<li>Git分支管理规范（feature/downloader）</li>
+</ul>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ==================== 第5周 ==================== -->
+<section id="w5" class="week-card">
+<div class="week-header"><h3>第5周：Spring Boot入门与RESTful API</h3><span>目标：写出第一个生产级后端服务</span></div>
+<div class="week-body">
+
+<table>
+<tr><th>日期</th><th>天数</th><th>学习内容</th><th>示例主题</th><th>练习任务</th></tr>
+<tr>
+<td>第29天</td><td>D29</td>
+<td>Spring Boot快速入门：自动配置、Starter、SpringApplication、配置文件（yml/properties）</td>
+<td>Hello Boot应用</td>
+<td>创建第一个Spring Boot项目，输出JSON</td>
+</tr>
+<tr>
+<td>第30天</td><td>D30</td>
+<td>Spring MVC：Controller、RequestMapping、PathVariable、RequestParam、RequestBody</td>
+<td>用户CRUD控制器</td>
+<td>实现用户信息的增删改查API</td>
+</tr>
+<tr>
+<td>第31天</td><td>D31</td>
+<td>RESTful设计规范、HTTP方法语义、状态码、Swagger/OpenAPI文档</td>
+<td>RESTful博客API</td>
+<td>设计一套完整的博客API（文章/评论/标签）</td>
+</tr>
+<tr>
+<td>第32天</td><td>D32</td>
+<td>参数校验：JSR-303/380（@Valid/@NotNull/@Size/@Email）、全局异常处理器</td>
+<td>表单校验与统一响应</td>
+<td>为所有入参添加校验注解</td>
+</tr>
+<tr>
+<td>第33天</td><td>D33</td>
+<td>Spring Data JPA：实体映射、Repository接口、CRUD、分页排序</td>
+<td>用户Repository</td>
+<td>用JPA实现用户数据持久化</td>
+</tr>
+<tr>
+<td>第34天</td><td>D34</td>
+<td>JPA关联关系：@OneToOne/@OneToMany/@ManyToMany、懒加载与级联、DTO转换</td>
+<td>订单-商品关联</td>
+<td>实现一对多、多对多关联查询</td>
+</tr>
+<tr>
+<td>第35天</td><td>D35</td>
+<td><strong>三周综合项目</strong>：博客系统后端API（Spring Boot + JPA）</td>
+<td>文章/评论/标签CRUD</td>
+<td>完成项目并编写API测试</td>
+</tr>
+</table>
+
+<div class="day-section">
+<div class="day-title">第29天（D29）：Spring Boot快速入门</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-fe">前端：对比Express/NestJS</span></div>
+
+<h4>知识点</h4>
+<p><strong>Spring Boot</strong>是Spring的脚手架，通过<strong>自动配置（Auto-configuration）</strong>和<strong>Starter依赖</strong>大幅简化项目搭建。<code>@SpringBootApplication</code> 包含 <code>@Configuration</code>、<code>@EnableAutoConfiguration</code>、<code>@ComponentScan</code>。配置文件优先级：命令行参数 > 外部文件 > application-{profile}.yml > application.yml。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">// 主启动类
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DemoApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+}
+
+// application.yml
+/*
+server:
+  port: 8080
+spring:
+  application:
+    name: blog-service
+  profiles:
+    active: dev
+*/
+
+// 简单Controller
+package com.example.demo.controller;
+
+import org.springframework.web.bind.annotation.*;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api")
+public class HelloController {
+    
+    @GetMapping("/hello")
+    public Map&lt;String, String&gt; hello(@RequestParam(defaultValue = "World") String name) {
+        return Map.of("message", "Hello, " + name + "!", "timestamp", java.time.Instant.now().toString());
+    }
+    
+    @GetMapping("/health")
+    public Map&lt;String, Object&gt; health() {
+        return Map.of("status", "UP", "version", "1.0.0");
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>通过 <a href="https://start.spring.io">start.spring.io</a> 或IDEA创建项目，依赖选Spring Web。</li>
+<li>配置dev/test/prod三个profile，分别使用不同端口。</li>
+<li>用AI工具解释 <code>@SpringBootApplication</code> 三个注解的作用。</li>
+</ol>
+
+<div class="warn">
+<strong>环境排查</strong>：若启动报端口冲突，修改 <code>server.port</code>；若提示"找不到主类"，检查pom.xml中是否有 <code>spring-boot-maven-plugin</code>；若依赖下载慢，配置阿里云Maven镜像。
+</div>
+</div>
+
+<div class="day-section">
+<div class="day-title">第30天（D30）：Spring MVC控制器</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p><code>@RestController</code> = <code>@Controller</code> + <code>@ResponseBody</code>，直接返回JSON。<code>@GetMapping/@PostMapping/@PutMapping/@DeleteMapping</code> 对应HTTP方法。<code>@PathVariable</code> 提取URL路径参数，<code>@RequestParam</code> 提取查询参数，<code>@RequestBody</code> 接收JSON请求体。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.demo.controller;
+
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
+
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+    
+    private final Map&lt;Long, User&gt; users = new HashMap&lt;&gt;();
+    private final AtomicLong idGen = new AtomicLong(1);
+    
+    @GetMapping
+    public List&lt;User&gt; listUsers(@RequestParam(required = false) String keyword) {
+        return users.values().stream()
+            .filter(u -> keyword == null || u.name().contains(keyword))
+            .toList();
+    }
+    
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable Long id) {
+        User user = users.get(id);
+        if (user == null) throw new NotFoundException("用户不存在: " + id);
+        return user;
+    }
+    
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        long id = idGen.getAndIncrement();
+        User saved = new User(id, user.name(), user.email());
+        users.put(id, saved);
+        return saved;
+    }
+    
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User user) {
+        if (!users.containsKey(id)) throw new NotFoundException("用户不存在");
+        User updated = new User(id, user.name(), user.email());
+        users.put(id, updated);
+        return updated;
+    }
+    
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        users.remove(id);
+    }
+}
+
+record User(Long id, String name, String email) {}
+
+class NotFoundException extends RuntimeException {
+    NotFoundException(String msg) { super(msg); }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>用Postman/curl测试上述5个接口。</li>
+<li>为查询接口添加分页参数（page/size）。</li>
+<li>实现批量删除接口（接收List&lt;Long&gt;）。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第31天（D31）：RESTful设计与Swagger</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p><strong>RESTful</strong>核心原则：资源用名词（/users而非/getUsers），HTTP方法表示操作（GET查/POST增/PUT全量更新/PATCH部分更新/DELETE删），状态码准确（200成功/201创建/204无内容/400请求错误/401未认证/403无权限/404不存在/500服务器错误）。<strong>OpenAPI（Swagger）</strong>通过注解自动生成接口文档。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.demo.controller;
+
+import io.swagger.v3.oas.annotations.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/articles")
+@Tag(name = "文章管理", description = "博客文章的增删改查")
+public class ArticleController {
+    
+    @Operation(summary = "创建文章", description = "发布新博客文章")
+    @ApiResponses({
+        @ApiResponse(responseCode = "201", description = "创建成功"),
+        @ApiResponse(responseCode = "400", description = "参数校验失败")
+    })
+    @PostMapping
+    public ResponseEntity&lt;Article&gt; create(
+            @RequestBody @Valid ArticleCreateRequest request) {
+        // 创建逻辑...
+        return ResponseEntity.status(HttpStatus.CREATED).body(new Article());
+    }
+    
+    @Operation(summary = "获取文章列表")
+    @GetMapping
+    public ResponseEntity&lt;PageResult&lt;Article&gt;&gt; list(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String tag) {
+        // 查询逻辑...
+        return ResponseEntity.ok(new PageResult&lt;&gt;());
+    }
+    
+    @Operation(summary = "删除文章")
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@Parameter(description = "文章ID") @PathVariable Long id) {
+        // 删除逻辑
+    }
+}
+
+record ArticleCreateRequest(
+    @NotBlank @Size(max = 100) String title,
+    @NotBlank String content,
+    List&lt;String&gt; tags
+) {}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>为博客系统设计完整的RESTful API路径（/articles, /comments, /tags）。</li>
+<li>引入springdoc-openapi，访问 /swagger-ui.html 查看文档。</li>
+<li>对比RESTful与RPC风格API（如/user/getById vs /users/{id}）的优劣。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第32天（D32）：参数校验与全局异常</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-qa">测试：从发现Bug到预防Bug</span></div>
+
+<h4>知识点</h4>
+<p><strong>JSR-380（Bean Validation 2.0）</strong>注解：<code>@NotNull</code>（非null）、<code>@NotBlank</code>（非空串）、<code>@Size</code>（长度范围）、<code>@Min/@Max</code>（数值范围）、<code>@Email</code>（邮箱格式）、<code>@Pattern</code>（正则）。在Controller参数前加 <code>@Valid</code> 触发校验。<strong>全局异常处理器</strong>用 <code>@RestControllerAdvice</code> + <code>@ExceptionHandler</code> 统一封装错误响应。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.demo.advice;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
+import java.time.LocalDateTime;
+import java.util.*;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+    
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleValidation(MethodArgumentNotValidException ex) {
+        Map&lt;String, String&gt; errors = new HashMap&lt;&gt;();
+        for (FieldError err : ex.getBindingResult().getFieldErrors()) {
+            errors.put(err.getField(), err.getDefaultMessage());
+        }
+        return new ErrorResponse(400, "参数校验失败", errors, LocalDateTime.now());
+    }
+    
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleNotFound(NotFoundException ex) {
+        return new ErrorResponse(404, ex.getMessage(), null, LocalDateTime.now());
+    }
+    
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorResponse handleGeneric(Exception ex) {
+        return new ErrorResponse(500, "服务器内部错误", null, LocalDateTime.now());
+    }
+}
+
+record ErrorResponse(int code, String message, Map&lt;String, String&gt; details, LocalDateTime timestamp) {}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>为用户注册接口添加@Email、@Size(min=6, max=20)密码校验。</li>
+<li>测试全局异常处理器：分别触发400、404、500错误，观察响应格式一致性。</li>
+<li>用AI工具生成10个常见校验场景的测试用例。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第33天（D33）：Spring Data JPA基础</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p><strong>JPA（Java Persistence API）</strong>是ORM规范，<strong>Hibernate</strong>是实现。<strong>Spring Data JPA</strong>通过接口继承（JpaRepository）自动生成CRUD方法。核心注解：<code>@Entity</code>（实体）、<code>@Id</code>（主键）、<code>@GeneratedValue</code>（自增策略）、<code>@Column</code>（列映射）。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.demo.entity;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "users")
+public class UserEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false, unique = true, length = 50)
+    private String username;
+    
+    @Column(nullable = false, length = 100)
+    private String email;
+    
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+    
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
+    
+    // getters and setters...
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+}
+
+// Repository
+package com.example.demo.repository;
+
+import com.example.demo.entity.UserEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository&lt;UserEntity, Long&gt; {
+    Optional&lt;UserEntity&gt; findByUsername(String username);
+    boolean existsByEmail(String email);
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>配置MySQL连接（spring.datasource.url/username/password）。</li>
+<li>用JPA自动生成数据库表（spring.jpa.hibernate.ddl-auto=update）。</li>
+<li>在UserRepository中添加自定义查询：按邮箱模糊搜索。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第34天（D34）：JPA关联与DTO</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p>关联关系：<code>@OneToOne</code>（一对一）、<code>@OneToMany</code> + <code>@ManyToOne</code>（一对多）、<code>@ManyToMany</code>（多对多）。<strong>FetchType.LAZY</strong>（懒加载，默认除EAGER外）在访问时才查询，性能更优但需注意Session关闭后的LazyInitializationException。<strong>DTO（Data Transfer Object）</strong>用于层间数据传输，避免暴露实体全部字段。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.demo.entity;
+
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+public class Article {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false)
+    private String title;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    private UserEntity author;
+    
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List&lt;Comment&gt; comments = new ArrayList&lt;&gt;();
+    
+    @ManyToMany
+    @JoinTable(
+        name = "article_tags",
+        joinColumns = @JoinColumn(name = "article_id"),
+        inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private List&lt;Tag&gt; tags = new ArrayList&lt;&gt;();
+    
+    // getters/setters omitted
+}
+
+@Entity
+public class Comment {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false, length = 1000)
+    private String content;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "article_id")
+    private Article article;
+}
+
+@Entity
+public class Tag {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(unique = true)
+    private String name;
+}
+
+// DTO
+package com.example.demo.dto;
+
+import java.util.List;
+
+public record ArticleDTO(
+    Long id,
+    String title,
+    String authorName,
+    List&lt;String&gt; tagNames,
+    int commentCount
+) {}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>实现ArticleRepository，查询某作者的所有文章及其评论数（JPQL或Native Query）。</li>
+<li>用MapStruct或手写转换器将Article实体转为ArticleDTO。</li>
+<li>对比LAZY和EAGER加载下SQL执行次数的差异（开启spring.jpa.show-sql=true）。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第35天（D35）：三周综合项目 — 博客系统后端API</div>
+<div class="day-meta">预计6-8h实践 | <span class="tag tag-project">综合项目</span></div>
+
+<h4>项目需求</h4>
+<p>完整的博客系统后端：文章（CRUD、分页、按标签筛选）、评论（嵌套回复）、标签管理。使用Spring Boot + Spring Data JPA + MySQL。要求RESTful设计、参数校验、全局异常处理、Swagger文档、DTO转换。</p>
+
+<h4>核心架构</h4>
+<pre><code class="text">blog-api/
+├── src/main/java/com/example/blog/
+│   ├── controller/      # REST控制器
+│   ├── service/         # 业务逻辑
+│   ├── repository/      # 数据访问
+│   ├── entity/          # JPA实体
+│   ├── dto/             # 数据传输对象
+│   ├── advice/          # 全局异常处理
+│   └── config/          # 配置类
+└── src/main/resources/
+    ├── application.yml
+    └── application-dev.yml
+</code></pre>
+
+<div class="checklist">
+<h4>验收标准</h4>
+<ul>
+<li>文章CRUD完整，支持分页查询</li>
+<li>评论支持嵌套（parent_id自关联）</li>
+<li>所有入参有校验注解</li>
+<li>全局异常处理器返回统一JSON格式</li>
+<li>Swagger文档可访问且描述完整</li>
+<li>单元测试≥5个（@WebMvcTest或@TestRestTemplate）</li>
+</ul>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ==================== 第6周 ==================== -->
+<section id="w6" class="week-card">
+<div class="week-header"><h3>第6周：MyBatis、认证授权与测试体系</h3><span>目标：掌握数据持久化、安全与自动化测试</span></div>
+<div class="week-body">
+
+<table>
+<tr><th>日期</th><th>天数</th><th>学习内容</th><th>示例主题</th><th>练习任务</th></tr>
+<tr>
+<td>第36天</td><td>D36</td>
+<td>MyBatis整合：Mapper接口、XML映射、注解方式、ResultMap</td>
+<td>用户Mapper实现</td>
+<td>用MyBatis重写博客系统的数据层</td>
+</tr>
+<tr>
+<td>第37天</td><td>D37</td>
+<td>MyBatis动态SQL：if/where/foreach/choose、多表关联查询、分页插件PageHelper</td>
+<td>动态条件查询</td>
+<td>实现复杂搜索接口（多条件动态SQL）</td>
+</tr>
+<tr>
+<td>第38天</td><td>D38</td>
+<td>Spring Security基础：Filter链、Authentication、Authorization、密码加密BCrypt</td>
+<td>基础登录认证</td>
+<td>为博客系统添加表单登录</td>
+</tr>
+<tr>
+<td>第39天</td><td>D39</td>
+<td>JWT认证：无状态Token设计、登录/注册API、Token刷新、拦截器校验</td>
+<td>前后端分离认证</td>
+<td>实现JWT登录注册全套流程</td>
+</tr>
+<tr>
+<td>第40天</td><td>D40</td>
+<td>JUnit5：@Test/@BeforeEach/@AfterEach、断言、参数化测试、嵌套测试</td>
+<td>服务层单元测试</td>
+<td>为UserService编写完整测试</td>
+</tr>
+<tr>
+<td>第41天</td><td>D41</td>
+<td>Mockito：@Mock/@InjectMocks、when/thenReturn、verify、Spy、@SpringBootTest</td>
+<td>Mock外部依赖</td>
+<td>Mock Repository测试Service</td>
+</tr>
+<tr>
+<td>第42天</td><td>D42</td>
+<td><strong>周项目</strong>：用户权限管理系统（RBAC）</td>
+<td>角色/权限/资源</td>
+<td>完成项目，测试覆盖率≥70%</td>
+</tr>
+</table>
+
+<div class="day-section">
+<div class="day-title">第36天（D36）：MyBatis入门</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-fe">前端：对比ORM vs 手写SQL</span></div>
+
+<h4>知识点</h4>
+<p><strong>MyBatis</strong>是半自动ORM框架，相比JPA更灵活，适合复杂SQL场景。核心组件：<strong>SqlSessionFactory</strong>、<strong>Mapper接口</strong>（绑定XML或注解）。Spring Boot通过 <code>mybatis-spring-boot-starter</code> 自动整合。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.demo.mapper;
+
+import com.example.demo.entity.UserEntity;
+import org.apache.ibatis.annotations.*;
+import java.util.List;
+
+@Mapper
+public interface UserMapper {
+    
+    @Select("SELECT * FROM users WHERE id = #{id}")
+    @Results({
+        @Result(property = "createdAt", column = "created_at")
+    })
+    UserEntity findById(Long id);
+    
+    @Select("&lt;script&gt;SELECT * FROM users WHERE 1=1"
+        + "&lt;if test='username != null'&gt; AND username LIKE CONCAT('%', #{username}, '%')&lt;/if&gt;"
+        + "&lt;if test='email != null'&gt; AND email = #{email}&lt;/if&gt;"
+        + "&lt;/script&gt;")
+    List&lt;UserEntity&gt; search(@Param("username") String username, @Param("email") String email);
+    
+    @Insert("INSERT INTO users(username, email, created_at) VALUES(#{username}, #{email}, NOW())")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(UserEntity user);
+    
+    @Update("UPDATE users SET username=#{username}, email=#{email} WHERE id=#{id}")
+    int update(UserEntity user);
+    
+    @Delete("DELETE FROM users WHERE id = #{id}")
+    int deleteById(Long id);
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>将第35天博客系统的JPA Repository全部替换为MyBatis Mapper。</li>
+<li>对比同一条查询在JPA和MyBatis下的SQL输出差异。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第37天（D37）：MyBatis动态SQL与分页</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p>MyBatis XML映射文件中，<code>&lt;if&gt;</code>条件判断、<code>&lt;where&gt;</code>自动处理AND/OR、<code>&lt;foreach&gt;</code>循环（用于IN语句）、<code>&lt;choose&gt;/&lt;when&gt;/&lt;otherwise&gt;</code>多分支。<strong>PageHelper</strong>是MyBatis分页插件，通过 <code>PageHelper.startPage(page, size)</code> 实现物理分页。</p>
+
+<h4>可运行代码示例（XML）</h4>
+<pre><code class="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;
+&lt;mapper namespace="com.example.demo.mapper.ArticleMapper"&gt;
+
+    &lt;resultMap id="articleMap" type="com.example.demo.entity.Article"&gt;
+        &lt;id property="id" column="id"/&gt;
+        &lt;result property="title" column="title"/&gt;
+        &lt;association property="author" javaType="com.example.demo.entity.UserEntity"&gt;
+            &lt;id property="id" column="author_id"/&gt;
+            &lt;result property="username" column="author_name"/&gt;
+        &lt;/association&gt;
+        &lt;collection property="tags" ofType="com.example.demo.entity.Tag"&gt;
+            &lt;id property="id" column="tag_id"/&gt;
+            &lt;result property="name" column="tag_name"/&gt;
+        &lt;/collection&gt;
+    &lt;/resultMap&gt;
+
+    &lt;select id="searchArticles" resultMap="articleMap"&gt;
+        SELECT a.*, u.id as author_id, u.username as author_name,
+               t.id as tag_id, t.name as tag_name
+        FROM articles a
+        LEFT JOIN users u ON a.author_id = u.id
+        LEFT JOIN article_tags at ON a.id = at.article_id
+        LEFT JOIN tags t ON at.tag_id = t.id
+        &lt;where&gt;
+            &lt;if test="keyword != null and keyword != ''"&gt;
+                AND a.title LIKE CONCAT('%', #{keyword}, '%')
+            &lt;/if&gt;
+            &lt;if test="authorId != null"&gt;
+                AND a.author_id = #{authorId}
+            &lt;/if&gt;
+            &lt;if test="tagIds != null and tagIds.size() &gt; 0"&gt;
+                AND a.id IN (
+                    SELECT article_id FROM article_tags
+                    WHERE tag_id IN
+                    &lt;foreach collection="tagIds" item="id" open="(" separator="," close=")"&gt;
+                        #{id}
+                    &lt;/foreach&gt;
+                )
+            &lt;/if&gt;
+        &lt;/where&gt;
+        ORDER BY a.created_at DESC
+    &lt;/select&gt;
+&lt;/mapper&gt;
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>用XML Mapper实现文章的多条件搜索（标题、作者、标签、时间范围）。</li>
+<li>集成PageHelper实现分页，观察生成的SQL是否带有LIMIT。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第38天（D38）：Spring Security基础</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-fe">前端：对比前端路由守卫</span></div>
+
+<h4>知识点</h4>
+<p><strong>Spring Security</strong>基于Filter链实现认证和授权。<strong>Authentication</strong>（认证）验证"你是谁"，<strong>Authorization</strong>（授权）决定"你能做什么"。<strong>BCrypt</strong>是推荐的密码哈希算法，内置盐值，无需额外存储。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.demo.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+public class SecurityConfig {
+    
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+    
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(csrf -> csrf.disable()) // 前后端分离时关闭
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginProcessingUrl("/api/auth/login")
+                .defaultSuccessUrl("/api/auth/success")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/api/auth/logout")
+                .permitAll()
+            );
+        return http.build();
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>配置内存中的用户（UserDetailsService），测试不同角色的访问权限。</li>
+<li>用BCryptPasswordEncoder编码密码，验证其不可逆向。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第39天（D39）：JWT前后端分离认证</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-qa">测试：将Postman测试转为代码</span></div>
+
+<h4>知识点</h4>
+<p><strong>JWT（JSON Web Token）</strong>由Header.Payload.Signature三部分组成，包含用户信息和过期时间。服务端无需存储Session，适合微服务和前后端分离。<strong>登录流程</strong>：验证用户名密码 → 生成JWT → 客户端存储（localStorage）→ 后续请求携带在Authorization头中。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.demo.security;
+
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.stereotype.Component;
+import java.security.Key;
+import java.util.Date;
+
+@Component
+public class JwtUtil {
+    private static final Key KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private static final long EXPIRATION = 86400000; // 24小时
+    
+    public String generateToken(String username, String role) {
+        return Jwts.builder()
+            .setSubject(username)
+            .claim("role", role)
+            .setIssuedAt(new Date())
+            .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
+            .signWith(KEY)
+            .compact();
+    }
+    
+    public Claims parseToken(String token) {
+        return Jwts.parserBuilder().setSigningKey(KEY).build()
+            .parseClaimsJws(token).getBody();
+    }
+    
+    public boolean validateToken(String token) {
+        try {
+            parseToken(token);
+            return true;
+        } catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
+    }
+}
+
+// JWT过滤器
+package com.example.demo.security;
+
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import org.springframework.security.authentication.*;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+import java.io.IOException;
+import java.util.List;
+
+@Component
+public class JwtFilter extends OncePerRequestFilter {
+    private final JwtUtil jwtUtil;
+    
+    JwtFilter(JwtUtil jwtUtil) { this.jwtUtil = jwtUtil; }
+    
+    @Override
+    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
+            throws ServletException, IOException {
+        String header = req.getHeader("Authorization");
+        if (header != null && header.startsWith("Bearer ")) {
+            String token = header.substring(7);
+            if (jwtUtil.validateToken(token)) {
+                String username = jwtUtil.parseToken(token).getSubject();
+                UsernamePasswordAuthenticationToken auth =
+                    new UsernamePasswordAuthenticationToken(username, null, List.of());
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            }
+        }
+        chain.doFilter(req, res);
+    }
+}
+</code></pre>
+
+<div class="tip">
+<strong>测试侧重</strong>：你之前用Postman测试接口，现在学习将这些测试用例转化为Java集成测试。第40-41天会详细讲解。今天先用Postman测试JWT流程：登录获取Token → 携带Token访问受保护接口 → Token过期后观察401响应。
+</div>
+
+<h4>练习任务</h4>
+<ol>
+<li>实现登录接口（/api/auth/login），验证成功后返回JWT。</li>
+<li>实现注册接口，密码用BCrypt加密存储。</li>
+<li>测试Token过期后的行为，实现Token刷新机制。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第40天（D40）：JUnit5单元测试</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p><strong>JUnit 5</strong> = JUnit Platform + JUnit Jupiter（新编程模型）+ JUnit Vintage（兼容JUnit 4）。常用注解：<code>@Test</code>, <code>@BeforeEach</code>, <code>@AfterEach</code>, <code>@BeforeAll</code>, <code>@AfterAll</code>, <code>@DisplayName</code>, <code>@ParameterizedTest</code>。<strong>断言</strong>：assertEquals, assertTrue, assertThrows, assertAll。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.demo.service;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class CalculatorTest {
+    
+    private Calculator calc;
+    
+    @BeforeEach
+    void setUp() { calc = new Calculator(); }
+    
+    @Test
+    @DisplayName("两个正数相加")
+    void testAdd() {
+        assertEquals(5, calc.add(2, 3), "2+3应该等于5");
+    }
+    
+    @Test
+    @DisplayName("除以零应抛出异常")
+    void testDivideByZero() {
+        Exception exception = assertThrows(ArithmeticException.class, () -> calc.divide(1, 0));
+        assertEquals("/ by zero", exception.getMessage());
+    }
+    
+    @ParameterizedTest
+    @CsvSource({"1,1,2", "0,0,0", "-1,1,0", "100,200,300"})
+    @DisplayName("多组加法数据")
+    void testAddMultiple(int a, int b, int expected) {
+        assertEquals(expected, calc.add(a, b));
+    }
+    
+    @Test
+    @DisplayName("批量断言")
+    void testAll() {
+        assertAll("计算器功能",
+            () -> assertEquals(2, calc.add(1, 1)),
+            () -> assertEquals(0, calc.subtract(1, 1)),
+            () -> assertEquals(4, calc.multiply(2, 2))
+        );
+    }
+}
+
+class Calculator {
+    int add(int a, int b) { return a + b; }
+    int subtract(int a, int b) { return a - b; }
+    int multiply(int a, int b) { return a * b; }
+    int divide(int a, int b) { return a / b; }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>为第7天通讯录的ContactManager编写完整JUnit5测试。</li>
+<li>用@ParameterizedTest测试边界条件（空值、超长字符串、特殊字符）。</li>
+<li>配置Maven Surefire插件，执行mvn test查看报告。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第41天（D41）：Mockito与Spring Boot测试</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-qa">测试：你的主场来了</span></div>
+
+<h4>知识点</h4>
+<p><strong>Mockito</strong>用于模拟依赖对象。<code>@Mock</code> 创建模拟对象，<code>@InjectMocks</code> 自动注入模拟对象到被测类。<code>when(...).thenReturn(...)</code> 打桩返回值，<code>verify(...)</code> 验证方法调用。<strong>@SpringBootTest</strong> 启动完整应用上下文，<strong>@WebMvcTest</strong> 仅测试Controller层（Mock Service），<strong>@DataJpaTest</strong> 仅测试数据层。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.demo.service;
+
+import com.example.demo.entity.UserEntity;
+import com.example.demo.repository.UserRepository;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
+class UserServiceTest {
+    
+    @Mock
+    private UserRepository userRepository;
+    
+    @InjectMocks
+    private UserService userService;
+    
+    @Test
+    void testFindUserById() {
+        UserEntity mockUser = new UserEntity();
+        mockUser.setId(1L);
+        mockUser.setUsername("alice");
+        
+        when(userRepository.findById(1L)).thenReturn(Optional.of(mockUser));
+        
+        UserEntity result = userService.findById(1L);
+        
+        assertNotNull(result);
+        assertEquals("alice", result.getUsername());
+        verify(userRepository, times(1)).findById(1L);
+    }
+    
+    @Test
+    void testUserNotFound() {
+        when(userRepository.findById(999L)).thenReturn(Optional.empty());
+        
+        assertThrows(NotFoundException.class, () -> userService.findById(999L));
+    }
+}
+
+// 集成测试示例
+package com.example.demo.controller;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@WebMvcTest(UserController.class)
+class UserControllerTest {
+    
+    @Autowired
+    private MockMvc mockMvc;
+    
+    @MockitoBean
+    private UserService userService;
+    
+    @Test
+    void testGetUser() throws Exception {
+        when(userService.findById(1L)).thenReturn(new UserDTO(1L, "alice", "a@b.com"));
+        
+        mockMvc.perform(get("/api/users/1"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.username").value("alice"));
+    }
+}
+</code></pre>
+
+<div class="tip">
+<strong>测试侧重</strong>：你从测试工程师转开发，这个模块是你的优势领域。重点理解Mockito的when/verify模式，以及如何将Postman中的测试步骤转化为@WebMvcTest中的andExpect链。思考一个问题：以前你测别人的接口，现在你要写代码让别人（和你）测——如何在设计阶段就考虑可测试性？
+</div>
+
+<h4>练习任务</h4>
+<ol>
+<li>为博客系统的ArticleService编写Mockito测试（Mock ArticleRepository）。</li>
+<li>编写@SpringBootTest测试完整的登录流程（注册→登录→访问受保护资源）。</li>
+<li>配置JaCoCo插件，生成测试覆盖率报告，确保行覆盖率≥70%。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第42天（D42）：周项目 — 用户权限管理系统（RBAC）</div>
+<div class="day-meta">预计6h实践 | <span class="tag tag-project">周项目</span></div>
+
+<h4>项目需求</h4>
+<p>实现经典的RBAC（Role-Based Access Control）系统：用户-角色-权限三级模型。支持用户管理、角色管理、权限分配。Spring Security + JWT认证，MyBatis持久化。要求：管理员可分配角色，不同角色访问不同API。</p>
+
+<h4>核心模型</h4>
+<pre><code class="sql">CREATE TABLE roles (id BIGINT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(50));
+CREATE TABLE permissions (id BIGINT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(50), resource VARCHAR(100));
+CREATE TABLE role_permissions (role_id BIGINT, permission_id BIGINT);
+CREATE TABLE user_roles (user_id BIGINT, role_id BIGINT);
+</code></pre>
+
+<div class="checklist">
+<h4>验收标准</h4>
+<ul>
+<li>JWT登录认证正常工作</li>
+<li>角色可配置，权限细到API级别</li>
+<li>单元测试行覆盖率≥70%</li>
+<li>集成测试覆盖登录+鉴权流程</li>
+<li>Swagger文档标注权限要求</li>
+</ul>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ==================== 第7周 ==================== -->
+<section id="w7" class="week-card">
+<div class="week-header"><h3>第7周：缓存、前端对接、Docker与部署</h3><span>目标：掌握Redis、前后端联调、容器化</span></div>
+<div class="week-body">
+
+<table>
+<tr><th>日期</th><th>天数</th><th>学习内容</th><th>示例主题</th><th>练习任务</th></tr>
+<tr>
+<td>第43天</td><td>D43</td>
+<td>Redis基础：5大数据类型、Jedis/Lettuce、Spring Data Redis整合</td>
+<td>用户Session缓存</td>
+<td>用Redis实现用户登录状态存储</td>
+</tr>
+<tr>
+<td>第44天</td><td>D44</td>
+<td>缓存策略：@Cacheable/@CacheEvict、缓存穿透/击穿/雪崩及解决方案</td>
+<td>商品详情缓存</td>
+<td>实现布隆过滤器防止缓存穿透</td>
+</tr>
+<tr>
+<td>第45天</td><td>D45</td>
+<td>消息队列基础：RabbitMQ核心概念、Spring AMQP、生产者消费者模式</td>
+<td>订单异步处理</td>
+<td>实现邮件发送队列</td>
+</tr>
+<tr>
+<td>第46天</td><td>D46</td>
+<td>前端快速回顾：Vue3/React18基础、Axios封装、Pinia/Redux状态管理</td>
+<td>前端项目脚手架</td>
+<td>搭建Vue3或React18项目</td>
+</tr>
+<tr>
+<td>第47天</td><td>D47</td>
+<td>前后端联调：CORS配置、代理转发、文件上传下载、统一错误处理</td>
+<td>完整联调流程</td>
+<td>实现前端登录页面并对接JWT</td>
+</tr>
+<tr>
+<td>第48天</td><td>D48</td>
+<td>Docker基础：镜像/容器/仓库、Dockerfile编写、Docker Compose多服务编排</td>
+<td>Spring Boot容器化</td>
+<td>将博客系统Docker化</td>
+</tr>
+<tr>
+<td>第49天</td><td>D49</td>
+<td><strong>周项目</strong>：带缓存的商品管理系统</td>
+<td>Redis+MySQL双写</td>
+<td>完成项目，Docker Compose一键启动</td>
+</tr>
+</table>
+
+<div class="day-section">
+<div class="day-title">第43天（D43）：Redis基础</div>
+<div class="day-meta">预计3h理论 + 2h实践 | <span class="tag tag-fe">前端：对比localStorage/sessionStorage</span></div>
+
+<h4>知识点</h4>
+<p><strong>Redis</strong>是内存数据结构存储，常用作缓存、会话、排行榜、限流器。5大数据类型：<strong>String</strong>（字符串/计数器）、<strong>Hash</strong>（对象映射）、<strong>List</strong>（队列/栈）、<strong>Set</strong>（去重集合）、<strong>ZSet</strong>（有序集合/排行榜）。<strong>Spring Data Redis</strong>提供 <code>StringRedisTemplate</code> 和 <code>RedisTemplate</code>。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.demo.redis;
+
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Service;
+import java.time.Duration;
+import java.util.Set;
+
+@Service
+public class RedisService {
+    private final StringRedisTemplate redisTemplate;
+    
+    public RedisService(StringRedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
+    
+    // String：缓存用户Token
+    public void saveToken(String username, String token) {
+        redisTemplate.opsForValue().set("token:" + username, token, Duration.ofHours(24));
+    }
+    
+    public String getToken(String username) {
+        return redisTemplate.opsForValue().get("token:" + username);
+    }
+    
+    // Hash：缓存商品信息
+    public void cacheProduct(String productId, Map&lt;String, String&gt; product) {
+        redisTemplate.opsForHash().putAll("product:" + productId, product);
+    }
+    
+    // ZSet：销量排行榜
+    public void addSales(String productId, double sales) {
+        redisTemplate.opsForZSet().add("rank:sales", productId, sales);
+    }
+    
+    public Set&lt;String&gt; topSales(int n) {
+        return redisTemplate.opsForZSet().reverseRange("rank:sales", 0, n - 1);
+    }
+    
+    // List：最新评论队列（保留最近100条）
+    public void addComment(String articleId, String comment) {
+        String key = "comments:" + articleId;
+        redisTemplate.opsForList().leftPush(key, comment);
+        redisTemplate.opsForList().trim(key, 0, 99);
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>安装Redis（Windows可用WSL或Docker），测试5种数据类型命令。</li>
+<li>实现一个基于Redis的IP限流器（1分钟最多10次请求）。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第44天（D44）：缓存策略与高可用</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p><strong>@Cacheable</strong>：方法返回结果存入缓存；<strong>@CacheEvict</strong>：清除缓存；<strong>@CachePut</strong>：更新缓存。缓存问题：<strong>穿透</strong>（查询不存在数据，用布隆过滤器或空值缓存解决）、<strong>击穿</strong>（热点key过期，用互斥锁或逻辑过期解决）、<strong>雪崩</strong>（大量key同时过期，用随机过期时间解决）。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.demo.cache;
+
+import org.springframework.cache.annotation.*;
+import org.springframework.stereotype.Service;
+
+@Service
+@CacheConfig(cacheNames = "products")
+public class ProductCacheService {
+    
+    @Cacheable(key = "#id", unless = "#result == null")
+    public Product getProduct(Long id) {
+        System.out.println("从数据库查询商品: " + id);
+        // 模拟数据库查询
+        return new Product(id, "商品" + id, 99.99);
+    }
+    
+    @CachePut(key = "#product.id")
+    public Product updateProduct(Product product) {
+        System.out.println("更新数据库: " + product.id());
+        return product;
+    }
+    
+    @CacheEvict(key = "#id")
+    public void deleteProduct(Long id) {
+        System.out.println("删除商品: " + id);
+    }
+    
+    @CacheEvict(allEntries = true)
+    public void clearCache() {
+        System.out.println("清空所有商品缓存");
+    }
+}
+
+record Product(Long id, String name, double price) {}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>为博客系统文章详情添加@Cacheable，观察二次查询是否走缓存。</li>
+<li>实现布隆过滤器（Google Guava或Redis Bloom），防止恶意查询不存在文章ID。</li>
+<li>设计缓存更新策略：更新文章时先更新数据库还是先删缓存？分析双写一致性。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第45天（D45）：RabbitMQ消息队列</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p><strong>RabbitMQ</strong>核心概念：Exchange（交换机）、Queue（队列）、Binding（绑定）、Routing Key（路由键）。Exchange类型：direct（精确匹配）、fanout（广播）、topic（模式匹配）、headers（头匹配）。消息可靠性：生产者confirm、消费者ack、持久化。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.demo.mq;
+
+import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
+
+@Configuration
+class RabbitConfig {
+    static final String QUEUE = "order.queue";
+    static final String EXCHANGE = "order.exchange";
+    static final String ROUTING_KEY = "order.created";
+    
+    @Bean Queue queue() { return new Queue(QUEUE, true); }
+    @Bean DirectExchange exchange() { return new DirectExchange(EXCHANGE); }
+    @Bean Binding binding(Queue q, DirectExchange ex) {
+        return BindingBuilder.bind(q).to(ex).with(ROUTING_KEY);
+    }
+}
+
+@Service
+class OrderProducer {
+    private final RabbitTemplate rabbitTemplate;
+    
+    OrderProducer(RabbitTemplate rabbitTemplate) { this.rabbitTemplate = rabbitTemplate; }
+    
+    public void sendOrder(String orderInfo) {
+        rabbitTemplate.convertAndSend(RabbitConfig.EXCHANGE, RabbitConfig.ROUTING_KEY, orderInfo);
+        System.out.println("发送订单消息: " + orderInfo);
+    }
+}
+
+@Service
+class OrderConsumer {
+    @RabbitListener(queues = RabbitConfig.QUEUE)
+    public void handleOrder(String message) {
+        System.out.println("处理订单: " + message);
+        // 异步处理：扣减库存、发送邮件等
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>安装RabbitMQ（Docker），实现生产者发送订单，消费者异步处理。</li>
+<li>配置消息持久化和消费者手动ack，测试消费者异常时消息不丢失。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第46天（D46）：前端快速回顾</div>
+<div class="day-meta">预计2h理论 + 3h实践 | <span class="tag tag-fe">前端：复用已有技能</span></div>
+
+<h4>知识点</h4>
+<p><strong>Vue 3</strong>：Composition API（setup、ref、reactive、computed、watch）、Vue Router 4、Pinia状态管理。<strong>React 18</strong>：Hooks（useState/useEffect/useContext）、React Router v6、Redux Toolkit。前后端分离项目的Axios封装：统一baseURL、请求拦截器（添加JWT头）、响应拦截器（统一错误处理、Token过期跳转）。</p>
+
+<h4>可运行代码示例（Vue3 + Axios）</h4>
+<pre><code class="javascript">// src/api/request.js
+import axios from 'axios';
+
+const request = axios.create({
+  baseURL: 'http://localhost:8080/api',
+  timeout: 10000
+});
+
+request.interceptors.request.use(config => {
+  const token = localStorage.getItem('token');
+  if (token) config.headers.Authorization = 'Bearer ' + token;
+  return config;
+});
+
+request.interceptors.response.use(
+  response => response.data,
+  error => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('token');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error.response?.data?.message || '请求失败');
+  }
+);
+
+export default request;
+
+// src/api/auth.js
+import request from './request';
+
+export const login = (data) => request.post('/auth/login', data);
+export const register = (data) => request.post('/auth/register', data);
+export const getUserInfo = () => request.get('/auth/me');
+
+// src/views/Login.vue (Composition API)
+&lt;script setup&gt;
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { login } from '@/api/auth';
+
+const username = ref('');
+const password = ref('');
+const router = useRouter();
+
+const handleLogin = async () => {
+  try {
+    const res = await login({ username: username.value, password: password.value });
+    localStorage.setItem('token', res.token);
+    router.push('/');
+  } catch (err) {
+    alert(err);
+  }
+};
+&lt;/script&gt;
+</code></pre>
+
+<div class="tip">
+<strong>前端侧重</strong>：如果你已有Vue/React基础，今天主要任务是搭建项目骨架和封装Axios，重点理解JWT在前端的存储和携带方式。如果你不熟悉前端，可用AI工具生成基础页面，自己修改API对接部分。
+</div>
+
+<h4>练习任务</h4>
+<ol>
+<li>用Vite创建Vue3或React18项目，安装Vue Router和Pinia/Redux Toolkit。</li>
+<li>封装Axios请求拦截器，实现Token自动添加和401跳转。</li>
+<li>实现登录页面表单（含校验）和后端JWT对接。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第47天（D47）：前后端联调与文件处理</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p><strong>CORS</strong>（跨域资源共享）：浏览器安全机制，后端需配置 <code>Access-Control-Allow-Origin</code>。Spring Boot通过 <code>@CrossOrigin</code> 或 <code>CorsConfigurationSource</code> 配置。开发时前端可用Vite代理解决跨域。文件上传用 <code>MultipartFile</code>，文件下载用 <code>ResponseEntity&lt;Resource&gt;</code>。</p>
+
+<h4>可运行代码示例</h4>
+<pre><code class="java">package com.example.demo.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class CorsConfig {
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/api/**")
+                    .allowedOrigins("http://localhost:5173") // Vite默认端口
+                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                    .allowedHeaders("*")
+                    .allowCredentials(true)
+                    .maxAge(3600);
+            }
+        };
+    }
+}
+
+// 文件上传下载
+package com.example.demo.controller;
+
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.nio.file.*;
+
+@RestController
+@RequestMapping("/api/files")
+public class FileController {
+    private final Path uploadDir = Paths.get("uploads");
+    
+    FileController() throws Exception {
+        Files.createDirectories(uploadDir);
+    }
+    
+    @PostMapping("/upload")
+    public ResponseEntity&lt;?&gt; upload(@RequestParam("file") MultipartFile file) throws Exception {
+        String filename = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+        Path target = uploadDir.resolve(filename);
+        file.transferTo(target);
+        return ResponseEntity.ok(Map.of("url", "/api/files/" + filename, "size", file.getSize()));
+    }
+    
+    @GetMapping("/{filename:.+}")
+    public ResponseEntity&lt;Resource&gt; download(@PathVariable String filename) throws Exception {
+        Path file = uploadDir.resolve(filename).normalize();
+        Resource resource = new UrlResource(file.toUri());
+        return ResponseEntity.ok()
+            .contentType(MediaType.APPLICATION_OCTET_STREAM)
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"")
+            .body(resource);
+    }
+}
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>配置Spring Boot CORS，让前端项目可正常调用API。</li>
+<li>实现头像上传功能（前端FormData + 后端MultipartFile）。</li>
+<li>前端实现图片预览，上传成功后显示头像。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第48天（D48）：Docker容器化</div>
+<div class="day-meta">预计3h理论 + 2h实践</div>
+
+<h4>知识点</h4>
+<p><strong>Docker</strong>将应用及其依赖打包为镜像，确保环境一致性。<strong>Dockerfile</strong>指令：FROM（基础镜像）、COPY（复制文件）、RUN（执行命令）、EXPOSE（暴露端口）、ENTRYPOINT（启动命令）。<strong>Docker Compose</strong>通过docker-compose.yml编排多容器应用。</p>
+
+<h4>可运行代码示例（Dockerfile）</h4>
+<pre><code class="dockerfile"># Dockerfile
+FROM eclipse-temurin:17-jdk-alpine
+WORKDIR /app
+COPY target/blog-api-1.0.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
+</code></pre>
+
+<pre><code class="yaml"># docker-compose.yml
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/blog
+      - SPRING_REDIS_HOST=redis
+      - SPRING_PROFILES_ACTIVE=prod
+    depends_on:
+      - db
+      - redis
+  
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: blog
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+  
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  db_data:
+</code></pre>
+
+<h4>练习任务</h4>
+<ol>
+<li>为博客系统编写Dockerfile，构建镜像并运行。</li>
+<li>编写docker-compose.yml，一键启动应用+MySQL+Redis。</li>
+<li>测试容器重启后数据是否持久化（volumes配置）。</li>
+</ol>
+</div>
+
+<div class="day-section">
+<div class="day-title">第49天（D49）：周项目 — 带缓存的商品管理系统</div>
+<div class="day-meta">预计6h实践 | <span class="tag tag-project">周项目</span></div>
+
+<h4>项目需求</h4>
+<p>Spring Boot + MyBatis + Redis + Vue3/React。商品CRUD、库存扣减（Redis原子操作decr）、分类管理、文件上传（商品图片）。Redis缓存商品详情和分类树。Docker Compose一键部署。</p>
+
+<div class="checklist">
+<h4>验收标准</h4>
+<ul>
+<li>商品详情走Redis缓存，更新时同步失效</li>
+<li>库存扣减使用Redis原子操作</li>
+<li>前端页面可正常CRUD并显示图片</li>
+<li>docker-compose up可一键启动全部服务</li>
+</ul>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ==================== 第8周 ==================== -->
+<section id="w8" class="week-card">
+<div class="week-header"><h3>第8周：全栈毕业项目与面试准备</h3><span>目标：独立完成完整全栈应用并准备求职</span></div>
+<div class="week-body">
+
+<table>
+<tr><th>日期</th><th>天数</th><th>学习内容</th><th>示例主题</th><th>练习任务</th></tr>
+<tr>
+<td>第50天</td><td>D50</td>
+<td>毕业项目启动：需求分析、数据库设计、API设计、项目架构搭建</td>
+<td>任务管理系统设计</td>
+<td>输出ER图和API文档</td>
+</tr>
+<tr>
+<td>第51天</td><td>D51</td>
+<td>后端核心模块开发：用户/任务/项目/通知实体与API</td>
+<td>CRUD+关联查询</td>
+<td>完成后端60%功能</td>
+</tr>
+<tr>
+<td>第52天</td><td>D52</td>
+<td>后端完善：JWT认证、Redis缓存、RabbitMQ通知、文件上传、Swagger</td>
+<td>权限+缓存+消息</td>
+<td>后端100%完成并自测</td>
+</tr>
+<tr>
+<td>第53天</td><td>D53</td>
+<td>前端项目搭建：路由、状态管理、布局组件、登录页</td>
+<td>Ant Design/Element Plus</td>
+<td>前端框架搭建完成</td>
+</tr>
+<tr>
+<td>第54天</td><td>D54</td>
+<td>前端业务页面：任务看板、项目列表、用户管理、个人中心</td>
+<td>看板拖拽+图表</td>
+<td>前端核心页面完成</td>
+</tr>
+<tr>
+<td>第55天</td><td>D55</td>
+<td>前后端联调、Bug修复、性能优化、代码Review</td>
+<td>联调+优化</td>
+<td>端到端测试通过</td>
+</tr>
+<tr>
+<td>第56天</td><td>D56</td>
+<td>Docker部署、文档编写、GitHub项目包装、演示准备</td>
+<td>CI/CD初探</td>
+<td>项目可在线演示</td>
+</tr>
+</table>
+
+<div class="day-section">
+<div class="day-title">第50天（D50）：毕业项目需求与设计</div>
+<div class="day-meta">预计4h设计 + 2h搭建 | <span class="tag tag-project">毕业项目</span></div>
+
+<h4>项目选题：团队协作任务管理系统（TeamTask）</h4>
+<p>一个仿Trello/Teambition的协作工具，包含：用户系统（注册/登录/个人信息）、项目管理（创建项目/成员/设置）、任务看板（待办/进行中/已完成，支持拖拽）、任务详情（标题/描述/截止日期/负责人/标签/附件）、通知系统（任务指派/截止提醒）、统计报表（个人/项目维度）。</p>
+
+<h4>数据库设计（核心表）</h4>
+<pre><code class="sql">CREATE TABLE users (id BIGINT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(50), email VARCHAR(100), avatar VARCHAR(255), created_at TIMESTAMP);
+CREATE TABLE projects (id BIGINT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(100), description TEXT, owner_id BIGINT, created_at TIMESTAMP);
+CREATE TABLE project_members (project_id BIGINT, user_id BIGINT, role VARCHAR(20), joined_at TIMESTAMP);
+CREATE TABLE tasks (id BIGINT PRIMARY KEY AUTO_INCREMENT, project_id BIGINT, title VARCHAR(200), description TEXT, status ENUM('TODO','IN_PROGRESS','DONE'), priority ENUM('LOW','MEDIUM','HIGH'), assignee_id BIGINT, due_date DATE, created_at TIMESTAMP);
+CREATE TABLE task_labels (task_id BIGINT, label VARCHAR(20));
+CREATE TABLE notifications (id BIGINT PRIMARY KEY AUTO_INCREMENT, user_id BIGINT, type VARCHAR(50), content TEXT, is_read BOOLEAN DEFAULT FALSE, created_at TIMESTAMP);
+</code></pre>
+
+<h4>API设计要点</h4>
+<ul>
+<li>GET /api/projects/{id}/tasks?status=&assigneeId= — 项目任务列表（带筛选）</li>
+<li>PATCH /api/tasks/{id}/status — 更新任务状态（看板拖拽）</li>
+<li>POST /api/tasks/{id}/assign — 指派任务（触发通知）</li>
+<li>GET /api/notifications — 当前用户通知列表</li>
+<li>GET /api/dashboard/stats — 仪表盘统计数据</li>
+</ul>
+</div>
+
+<div class="day-section">
+<div class="day-title">第51-52天（D51-D52）：后端核心开发</div>
+<div class="day-meta">每天6h编码</div>
+
+<h4>开发顺序建议</h4>
+<ol>
+<li><strong>基础设施</strong>：Spring Boot基础配置、MyBatis Mapper、统一响应封装、全局异常处理。</li>
+<li><strong>用户模块</strong>：注册/登录（JWT）、个人信息修改、头像上传。</li>
+<li><strong>项目模块</strong>：项目CRUD、成员增删、角色权限（OWNER/ADMIN/MEMBER）。</li>
+<li><strong>任务模块</strong>：任务CRUD、状态流转、标签管理、分配与截止日期。</li>
+<li><strong>通知模块</strong>：任务分配时发送通知（RabbitMQ异步）、通知已读。</li>
+<li><strong>统计模块</strong>：项目任务状态分布、成员任务完成情况（SQL聚合）。</li>
+</ol>
+
+<h4>关键代码：看板状态更新</h4>
+<pre><code class="java">@PatchMapping("/{id}/status")
+public ResponseEntity&lt;?&gt; updateStatus(@PathVariable Long id,
+                                      @RequestBody @Valid StatusUpdateRequest request,
+                                      @AuthenticationPrincipal String username) {
+    Task task = taskService.findById(id);
+    // 权限检查：项目成员才能更新
+    projectService.checkMembership(task.getProjectId(), username);
+    
+    TaskStatus oldStatus = task.getStatus();
+    taskService.updateStatus(id, request.status());
+    
+    // 发送通知（如果是别人分配的任务且状态变为DONE）
+    if (oldStatus != TaskStatus.DONE && request.status() == TaskStatus.DONE
+        && !task.getAssignee().equals(username)) {
+        notificationService.send(task.getAssignee(), "任务已完成", task.getTitle());
+    }
+    
+    return ResponseEntity.ok().build();
+}
+</code></pre>
+</div>
+
+<div class="day-section">
+<div class="day-title">第53-54天（D53-D54）：前端开发</div>
+<div class="day-meta">每天6h编码 | <span class="tag tag-fe">前端：展示你原有技能</span></div>
+
+<h4>页面清单</h4>
+<ul>
+<li><strong>登录/注册页</strong>：表单+JWT存储+路由跳转。</li>
+<li><strong>项目列表页</strong>：卡片布局+创建项目弹窗。</li>
+<li><strong>看板页</strong>：三列（TODO/IN_PROGRESS/DONE）+拖拽排序+新建任务。</li>
+<li><strong>任务详情弹窗</strong>：编辑标题/描述/截止日期/负责人/标签。</li>
+<li><strong>个人中心</strong>：信息编辑+头像上传+密码修改。</li>
+<li><strong>通知中心</strong>：消息列表+已读标记。</li>
+</ul>
+
+<div class="tip">
+<strong>前端侧重</strong>：这是展示你原有前端技能的舞台。使用你最熟悉的前端框架，把Java后端API对接到漂亮的UI上。测试工程师同学如果前端较弱，可使用Ant Design Pro或AI生成的模板，重点放在API对接和数据展示。
+</div>
+</div>
+
+<div class="day-section">
+<div class="day-title">第55天（D55）：联调与优化</div>
+<div class="day-meta">预计6h实践</div>
+
+<h4>联调检查清单</h4>
+<ul>
+<li>注册→登录→访问所有页面，无401/403异常。</li>
+<li>创建项目→添加成员→创建任务→拖拽状态→收到通知，完整流程走通。</li>
+<li>文件上传/下载正常，图片可预览。</li>
+<li>并发测试：两个人同时编辑同一任务，观察乐观锁或最后写入者胜出。</li>
+</ul>
+
+<h4>性能优化点</h4>
+<ul>
+<li>任务列表接口是否走了N+1查询？用JOIN或Entity Graph优化。</li>
+<li>看板数据是否可缓存？Redis缓存项目任务列表。</li>
+<li>前端是否做了懒加载？大项目任务多时虚拟滚动。</li>
+</ul>
+</div>
+
+<div class="day-section">
+<div class="day-title">第56天（D56）：部署与包装</div>
+<div class="day-meta">预计6h实践</div>
+
+<h4>部署清单</h4>
+<ol>
+<li>编写Dockerfile和docker-compose.yml（后端+前端nginx+MySQL+Redis）。</li>
+<li>构建并测试本地Docker部署。</li>
+<li>准备项目README：项目介绍、技术栈、功能截图、本地运行步骤、API文档链接。</li>
+<li>代码提交到GitHub/GitLab，确保commit历史清晰。</li>
+<li>录制一个2分钟的项目演示视频（可选但加分）。</li>
+</ol>
+
+<div class="checklist">
+<h4>毕业项目验收标准</h4>
+<ul>
+<li>完整的功能闭环：用户→项目→任务→通知</li>
+<li>前后端可独立运行，也可Docker Compose一键启动</li>
+<li>后端单元测试行覆盖率≥70%</li>
+<li>包含JWT认证和角色权限控制</li>
+<li>代码结构清晰，有适当注释和文档</li>
+<li>Git提交历史规范（至少20个有意义的commit）</li>
+</ul>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ==================== 缓冲期 ==================== -->
+<section id="buffer" class="week-card">
+<div class="week-header"><h3>缓冲期（第57-62天）：查漏补缺与求职准备</h3><span>弹性时间，用于补全薄弱环节</span></div>
+<div class="week-body">
+
+<table>
+<tr><th>日期</th><th>天数</th><th>学习内容</th><th>练习任务</th></tr>
+<tr>
+<td>第57天</td><td>D57</td>
+<td>JVM基础：内存结构（堆/栈/方法区）、垃圾回收算法、G1/ZGC简介、常用JVM参数</td>
+<td>用jvisualvm观察程序内存占用</td>
+</tr>
+<tr>
+<td>第58天</td><td>D58</td>
+<td>代码Review与重构：设计原则（SOLID）、代码坏味道识别、重构手法</td>
+<td>Review自己的毕业项目，列出3个重构点</td>
+</tr>
+<tr>
+<td>第59天</td><td>D59</td>
+<td>简历包装：项目描述STAR法则、技术栈关键词、GitHub链接、技术博客</td>
+<td>完成简历初稿，找朋友Review</td>
+</tr>
+<tr>
+<td>第60天</td><td>D60</td>
+<td>模拟面试：Java基础、Spring原理、项目深挖、场景设计题</td>
+<td>用AI进行3轮模拟面试</td>
+</tr>
+<tr>
+<td>第61天</td><td>D61</td>
+<td>查漏补缺：重温薄弱知识点（Stream/JVM/并发/SQL优化）</td>
+<td>完成一套Java笔试题</td>
+</tr>
+<tr>
+<td>第62天</td><td>D62</td>
+<td>总结与规划：学习笔记整理、技术博客输出、下一步学习计划</td>
+<td>发布第一篇技术博客</td>
+</tr>
+</table>
+
+<div class="day-section">
+<div class="day-title">最小可行性激励方案</div>
+<div class="day-meta">转型过程中信心受挫时阅读</div>
+
+<p>如果你感到挫败，请执行以下<strong>最小可行性经验</strong>：</p>
+<ol>
+<li><strong>降低目标</strong>：不要想着"学会Spring Boot"，改为"今天只搞懂@Autowired的作用"。</li>
+<li><strong>回看成果</strong>：打开你的GitHub，看看你第1天和第21天的代码差异，你已经走了很远。</li>
+<li><strong>求助AI</strong>：把报错信息直接贴给ChatGPT，让它解释并给出修复方案——但务必理解每一行修复代码。</li>
+<li><strong>社区互助</strong>：在Stack Overflow或V2EX提问，描述清楚"我期望什么/实际得到什么/我已尝试什么"。</li>
+<li><strong>身体优先</strong>：如果连续3天都学不进去，休息1天，去跑步或睡觉。大脑在休息时会巩固记忆。</li>
+</ol>
+
+<div class="warn">
+<strong>不要做的事情</strong>：不要同时学多门语言/框架；不要追求"完美项目"而放弃提交；不要与他人比较进度；不要复制不懂的代码。
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ==================== 质量验收标准 ==================== -->
+<section id="check" class="week-card">
+<div class="week-header"><h3>各阶段质量验收标准</h3><span>每个阶段结束后的自测清单</span></div>
+<div class="week-body">
+
+<h3>阶段一验收（第21天结束）：Java核心</h3>
+<div class="checklist">
+<ul>
+<li>能独立编写包含类、继承、接口、异常的Java程序（>200行）</li>
+<li>能解释ArrayList扩容机制和HashMap哈希冲突解决</li>
+<li>能用Stream API完成过滤、映射、分组、排序操作</li>
+<li>能手写单例模式（至少2种实现）</li>
+<li>理解泛型的PECS原则并能举例</li>
+<li>代码遵循Java命名规范，有适当注释</li>
+</ul>
+</div>
+
+<h3>阶段二验收（第28天结束）：工程化与数据</h3>
+<div class="checklist">
+<ul>
+<li>能设计符合第三范式的数据库表结构</li>
+<li>能编写包含JOIN、子查询、聚合的复杂SQL</li>
+<li>能用Maven管理依赖并打包可运行jar</li>
+<li>能用Git进行分支管理、冲突解决</li>
+<li>理解线程同步原理，能编写线程安全的代码</li>
+</ul>
+</div>
+
+<h3>阶段三验收（第42天结束）：Spring与测试</h3>
+<div class="checklist">
+<ul>
+<li>能独立搭建Spring Boot项目并开发RESTful API</li>
+<li>能配置Spring Data JPA或MyBatis完成CRUD</li>
+<li>能实现JWT登录认证和基于角色的权限控制</li>
+<li>单元测试行覆盖率≥70%</li>
+<li>能用Mockito模拟依赖进行单元测试</li>
+<li>能用Spring Boot Test完成集成测试</li>
+</ul>
+</div>
+
+<h3>阶段四验收（第56天结束）：全栈与部署</h3>
+<div class="checklist">
+<ul>
+<li>能独立完成包含前后端+数据库的全栈项目</li>
+<li>能用Redis缓存热点数据，解决缓存穿透问题</li>
+<li>能用Docker Compose部署完整应用</li>
+<li>代码Review通过（无严重设计问题，命名规范）</li>
+<li>项目README完整，他人可按文档运行</li>
+</ul>
+</div>
+
+<h3>自动化测试覆盖率要求</h3>
+<table>
+<tr><th>层级</th><th>工具</th><th>行覆盖率要求</th><th>验证方式</th></tr>
+<tr><td>单元测试</td><td>JUnit5 + Mockito</td><td>≥70%</td><td>JaCoCo报告</td></tr>
+<tr><td>集成测试</td><td>@SpringBootTest</td><td>核心流程覆盖</td><td>mvn test</td></tr>
+<tr><td>API测试</td><td>TestRestTemplate/MockMvc</td><td>所有Controller方法</td><td>@WebMvcTest</td></tr>
+</table>
+
+</div>
+</section>
+
+<!-- ==================== 常见陷阱与反模式 ==================== -->
+<section id="pitfalls" class="week-card">
+<div class="week-header"><h3>常见陷阱与反模式</h3><span>新手最容易犯的错误及解决方式</span></div>
+<div class="week-body">
+
+<div class="day-section">
+<div class="day-title">陷阱1：== vs equals（第1-2周高发）</div>
+<div class="day-meta"><span class="tag tag-pitfall">反模式</span></div>
+<p><strong>错误</strong>：<code>if (user.getName() == "admin")</code> — String是引用类型，==比较的是地址。</p>
+<p><strong>正确</strong>：<code>if ("admin".equals(user.getName()))</code> — 用equals比较内容，且常量放前面避免NPE。</p>
+</div>
+
+<div class="day-section">
+<div class="day-title">陷阱2：在循环中拼接字符串（第2周高发）</div>
+<div class="day-meta"><span class="tag tag-pitfall">反模式</span></div>
+<p><strong>错误</strong>：在循环中用 <code>String +=</code>，每次都会创建新String对象，时间复杂度O(n²)。</p>
+<p><strong>正确</strong>：用 <code>StringBuilder</code> 或 <code>StringJoiner</code>。</p>
+</div>
+
+<div class="day-section">
+<div class="day-title">陷阱3：忽视泛型类型安全（第3周高发）</div>
+<div class="day-meta"><span class="tag tag-pitfall">反模式</span></div>
+<p><strong>错误</strong>：<code>List list = new ArrayList(); list.add("a"); Integer i = (Integer) list.get(0);</code></p>
+<p><strong>正确</strong>：始终使用泛型 <code>List&lt;String&gt; list = new ArrayList&lt;&gt;();</code></p>
+</div>
+
+<div class="day-section">
+<div class="day-title">陷阱4：Stream重复消费（第3周高发）</div>
+<div class="day-meta"><span class="tag tag-pitfall">反模式</span></div>
+<p><strong>错误</strong>：对同一个Stream对象调用两次终结操作（如forEach后再count），会抛出IllegalStateException。</p>
+<p><strong>正确</strong>：Stream只能消费一次，需要多次使用时先collect到List。</p>
+</div>
+
+<div class="day-section">
+<div class="day-title">陷阱5：JPA N+1查询（第5-6周高发）</div>
+<div class="day-meta"><span class="tag tag-pitfall">反模式</span></div>
+<p><strong>错误</strong>：遍历订单列表时访问每个订单的用户信息，触发N+1条SQL。</p>
+<p><strong>正确</strong>：使用 <code>@EntityGraph</code>、<code>JOIN FETCH</code> 或 <code>@BatchSize</code>。</p>
+</div>
+
+<div class="day-section">
+<div class="day-title">陷阱6：事务边界错误（第6周高发）</div>
+<div class="day-meta"><span class="tag tag-pitfall">反模式</span></div>
+<p><strong>错误</strong>：<code>@Transactional</code> 加在private方法上（不生效），或在非Spring管理的类中调用（代理不生效）。</p>
+<p><strong>正确</strong>：<code>@Transactional</code> 只能用于public方法，且必须通过Spring代理调用。</p>
+</div>
+
+<div class="day-section">
+<div class="day-title">陷阱7：JWT密钥硬编码（第6周高发）</div>
+<div class="day-meta"><span class="tag tag-pitfall">反模式</span></div>
+<p><strong>错误</strong>：将JWT密钥直接写在代码中并提交到GitHub。</p>
+<p><strong>正确</strong>：密钥放入环境变量或配置文件（.env），并在.gitignore中排除。</p>
+</div>
+
+<div class="day-section">
+<div class="day-title">陷阱8：缓存与数据库不一致（第7周高发）</div>
+<div class="day-meta"><span class="tag tag-pitfall">反模式</span></div>
+<p><strong>错误</strong>：先更新缓存再更新数据库，如果数据库更新失败则缓存是脏数据。</p>
+<p><strong>正确</strong>：先更新数据库，再删除缓存（Cache-Aside模式）。读取时缓存未命中再从数据库加载。</p>
+</div>
+
+</div>
+</section>
+
+<!-- ==================== 可复用模板 ==================== -->
+<section id="templates" class="week-card">
+<div class="week-header"><h3>可复用的学习模板</h3><span>直接复制使用</span></div>
+<div class="week-body">
+
+<h3>每日学习日志模板</h3>
+<div class="template-box">日期：202X-XX-XX  第X天
+今日目标：
+1. 
+2. 
+
+学习内容摘要：
+- 
+- 
+
+代码示例（关键片段）：
+```java
+// 
+```
+
+遇到的问题：
+1. 问题：
+   解决：
+
+AI工具使用记录：
+- 提问：
+- AI回答核心：
+- 验证结果：
+
+明日计划：
+- 
+
+用时：理论__h + 实践__h = 总计__h
+自评（1-5）：
+</div>
+
+<h3>Git分支策略与提交规范</h3>
+<pre><code class="text">分支模型：
+- main/master：保护分支，仅通过PR合并
+- feature/*：功能分支，如 feature/user-login
+- bugfix/*：修复分支，如 bugfix/jwt-expired
+- hotfix/*：紧急修复，从main切出
+
+Commit Message模板：
+&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+
+&lt;body&gt;
+
+类型(type)：
+- feat: 新功能
+- fix: 修复
+- docs: 文档
+- style: 格式（不影响代码逻辑）
+- refactor: 重构
+- test: 测试
+- chore: 构建/工具
+
+示例：
+feat(auth): 实现JWT登录认证
+
+- 添加JwtUtil工具类生成和解析Token
+- 配置Spring Security过滤器链
+- 实现登录/注册API
+
+fix(cache): 修复Redis缓存穿透问题
+
+- 添加布隆过滤器拦截非法ID
+- 空值缓存时间设为60秒
+</code></pre>
+
+<h3>Pull Request模板</h3>
+<div class="template-box">## 背景
+<!-- 描述这个PR解决什么问题或实现什么功能 -->
+
+## 改动点
+- [ ] 新增/修改/删除了哪些文件
+- [ ] 核心逻辑说明
+
+## 测试
+- [ ] 单元测试已添加/更新
+- [ ] 集成测试已通过
+- [ ] 手动测试场景：
+  1. 
+  2. 
+
+## 截图（如适用）
+<!-- 前端改动请贴UI截图 -->
+
+## 自测清单
+- [ ] 代码编译通过
+- [ ] 本地运行正常
+- [ ] 无控制台报错
+- [ ] 代码Review通过
+
+## 关联Issue
+Fixes #123
+</div>
+
+<h3>项目目录结构规范</h3>
+<pre><code class="text">project-name/
+├── src/main/java/com/example/project/
+│   ├── ProjectApplication.java
+│   ├── config/          # 配置类（Security/CORS/Redis等）
+│   ├── controller/      # REST API控制器
+│   ├── service/         # 业务逻辑接口+实现
+│   ├── repository/      # 数据访问（JPA/MyBatis）
+│   ├── entity/          # JPA实体/数据库表映射
+│   ├── dto/             # 请求/响应DTO
+│   ├── mapper/          # MapStruct或手动转换器
+│   ├── exception/       # 自定义异常
+│   ├── advice/          # 全局异常处理器
+│   ├── security/        # JWT/Security相关
+│   └── util/            # 工具类
+├── src/main/resources/
+│   ├── application.yml
+│   ├── application-dev.yml
+│   ├── application-prod.yml
+│   ├── mapper/          # MyBatis XML文件
+│   └── db/migration/    # 数据库迁移脚本（Flyway/Liquibase）
+├── src/test/java/       # 测试代码（镜像main结构）
+├── Dockerfile
+├── docker-compose.yml
+├── pom.xml / build.gradle
+└── README.md
+</code></pre>
+
+</div>
+</section>
+
+<!-- ==================== 简历与面试指南 ==================== -->
+<section id="interview" class="week-card">
+<div class="week-header"><h3>转型简历与面试指南</h3><span>包装项目、回答敏感问题</span></div>
+<div class="week-body">
+
+<h3>项目描述STAR法则</h3>
+<p>每个项目用STAR法则描述：</p>
+<ul>
+<li><strong>Situation（背景）</strong>：为什么要做这个项目？解决什么业务问题？</li>
+<li><strong>Task（任务）</strong>：你在项目中承担什么角色？负责哪些模块？</li>
+<li><strong>Action（行动）</strong>：具体用了什么技术？做了什么设计决策？</li>
+<li><strong>Result（结果）</strong>：项目成果？数据指标？你学到了什么？</li>
+</ul>
+
+<h3>示例：毕业项目描述</h3>
+<div class="template-box">团队协作任务管理系统（全栈独立开发）
+
+背景：为解决小团队协作中任务分配和进度跟踪低效的问题，独立开发了一个类Trello的协作工具。
+
+技术栈：Spring Boot + MyBatis + MySQL + Redis + RabbitMQ + Vue3 + Docker
+
+核心功能与职责：
+- 设计并实现了RBAC权限模型，支持项目OWNER/ADMIN/MEMBER三级角色
+- 使用Redis缓存热点任务数据，引入布隆过滤器解决缓存穿透，QPS提升3倍
+- 基于RabbitMQ实现任务分配异步通知，降低主流程响应时间200ms
+- 采用JWT实现前后端分离的无状态认证，支持Token自动刷新
+- 使用Docker Compose完成一键部署，包含应用/数据库/缓存/消息队列
+
+成果：独立完成从需求分析到部署运维的全流程，代码测试覆盖率75%，GitHub获Star XX个
+</div>
+
+<h3>高频面试题与回答建议</h3>
+
+<h4>Q：你为什么从前端/测试转Java开发？</h4>
+<p><strong>回答框架</strong>：</p>
+<ol>
+<li>肯定原有经验的价值（"X年测试让我深刻理解代码质量和系统稳定性"）。</li>
+<li>说明转型的内在动机（"我希望从发现问题转向创造解决方案"）。</li>
+<li>展示已做的准备（"过去2个月我系统学习了Java/Spring/数据库，并独立完成3个项目"）。</li>
+<li>强调复合优势（"我不仅能写后端，还能独立完成前端对接和测试，减少团队沟通成本"）。</li>
+</ol>
+
+<h4>Q：你认为自己和科班Java开发相比有什么优势/劣势？</h4>
+<p><strong>优势</strong>：跨领域视角（测试背景更懂质量保障，前端背景更懂用户体验）、更强的自学能力（在职转型证明自驱力）、全栈能力。</p>
+<p><strong>劣势</strong>：算法基础可能较弱（坦诚）→ 但已在LeetCode刷题补强；大型分布式系统经验不足 → 但已学习理论并在毕业项目中模拟。</p>
+
+<h4>Q：介绍你的毕业项目，遇到的最大技术挑战是什么？</h4>
+<p><strong>建议回答</strong>：选择有深度的技术点，例如：</p>
+<ul>
+<li>"缓存与数据库一致性" — 讲清楚Cache-Aside模式、为什么先更新数据库再删缓存、失败时的补偿策略。</li>
+<li>"JWT无状态认证的权限刷新" — 讲清楚双Token机制（Access Token + Refresh Token）或黑名单方案。</li>
+</ul>
+
+<h4>Q：Spring Boot的自动配置原理是什么？</h4>
+<p><strong>回答要点</strong>：<code>@EnableAutoConfiguration</code> → <code>spring.factories</code> → 条件注解（@ConditionalOnClass/@ConditionalOnProperty）→ 根据classpath和配置决定是否装配Bean。</p>
+
+<h4>Q：MySQL索引为什么用B+树而不是哈希？</h4>
+<p><strong>回答要点</strong>：哈希只支持等值查询，不支持范围查询和排序；B+树叶子节点形成有序链表，支持高效的范围查询和顺序遍历；B+树非叶子节点不存数据，单次IO能读取更多索引。</p>
+
+<h3>薪资谈判建议</h3>
+<div class="tip">
+转型第一份工作，建议以"入行+学习"为主要目标，薪资可适度让步。但如果有前端/测试经验加成，可争取"初级偏上"或"中级"职级。重点强调：你能独立负责完整模块（从API到测试），减少团队分工成本。
+</div>
+
+</div>
+</section>
+
+<!-- ==================== 学习资源索引 ==================== -->
+<section id="resources" class="week-card">
+<div class="week-header"><h3>Java从入门到精通学习资源索引</h3><span>免费高质量内容</span></div>
+<div class="week-body">
+
+<h3>官方文档（速查必备）</h3>
+<table>
+<tr><th>资源</th><th>地址</th><th>用途</th></tr>
+<tr><td>Oracle Java 17文档</td><td>docs.oracle.com/javase/17/docs/api</td><td>API速查</td></tr>
+<tr><td>Spring Boot官方文档</td><td>spring.io/projects/spring-boot</td><td>配置参考</td></tr>
+<tr><td>Spring Data JPA参考</td><td>spring.io/projects/spring-data-jpa</td><td>查询方法语法</td></tr>
+<tr><td>MyBatis官方文档</td><td>mybatis.org/mybatis-3</td><td>XML映射语法</td></tr>
+<tr><td>Maven参考</td><td>maven.apache.org/guides</td><td>生命周期/插件</td></tr>
+</table>
+
+<h3>免费在线教程</h3>
+<table>
+<tr><th>资源</th><th>说明</th></tr>
+<tr><td>廖雪峰Java教程</td><td>中文入门首选，覆盖基础到进阶，免费</td></tr>
+<tr><td>尚硅谷Spring Boot教程（B站）</td><td>项目驱动，适合快速上手</td></tr>
+<tr><td>狂神说Java（B站）</td><td>通俗易懂，适合零基础</td></tr>
+<tr><td>Java Guides（javaguides.net）</td><td>英文，Spring生态详解</td></tr>
+<tr><td>Baeldung（baeldung.com）</td><td>英文，Spring最佳实践</td></tr>
+</table>
+
+<h3>推荐书籍</h3>
+<table>
+<tr><th>书名</th><th>作者</th><th>学习阶段</th></tr>
+<tr><td>《Java核心技术 卷I》</td><td>Cay Horstmann</td><td>第1-2周</td></tr>
+<tr><td>《Effective Java》</td><td>Joshua Bloch</td><td>第3周后反复阅读</td></tr>
+<tr><td>《深入理解Java虚拟机》</td><td>周志明</td><td>第57天（缓冲期）</td></tr>
+<tr><td>《Spring实战》</td><td>Craig Walls</td><td>第5-6周</td></tr>
+<tr><td>《MySQL必知必会》</td><td>Ben Forta</td><td>第4周</td></tr>
+</table>
+
+<h3>开源项目参考</h3>
+<table>
+<tr><th>项目</th><th>GitHub</th><th>学习点</th></tr>
+<tr><td>mall（电商系统）</td><td>macrozheng/mall</td><td>完整电商后端架构</td></tr>
+<tr><td>newbee-mall</td><td>newbee-ltd/newbee-mall</td><td>前后端分离电商</td></tr>
+<tr><td>eladmin</td><td>elunez/eladmin</td><td>后台管理系统+权限</td></tr>
+<tr><td>JavaGuide</td><td>Snailclimb/JavaGuide</td><td>面试知识库</td></tr>
+</table>
+
+<h3>刷题与算法</h3>
+<ul>
+<li><strong>LeetCode</strong>：每周3-5题，重点Hot 100中的简单/中等题。</li>
+<li><strong>HackerRank</strong>：Java专项练习，巩固语法。</li>
+</ul>
+
+<h3>AI辅助学习提示词模板</h3>
+<div class="template-box">1. 解释报错：
+"我在Java中遇到了这个错误：[粘贴堆栈]。请用中文解释错误原因，给出修复代码，并告诉我如何避免类似问题。"
+
+2. 生成测试用例：
+"请为以下Java方法生成JUnit5测试用例，包含正常场景、边界条件和异常场景：[粘贴代码]"
+
+3. 代码Review：
+"请Review以下Java代码，指出潜在问题（性能/安全/可读性），并给出改进建议：[粘贴代码]"
+
+4. 概念讲解：
+"请用通俗的比喻解释Java中的[概念，如JVM内存模型/Spring IoC]，并举一个贴近业务的代码示例。"
+
+5. 面试模拟：
+"请扮演Java后端面试官，问我5个关于[Spring Boot/并发/JVM]的问题，等我回答后给出评分和改进建议。"
+</div>
+
+</div>
+</section>
+
+<footer>
+<p>60天Java全栈转型实战计划 · 精确到每一天 · 附完整代码示例</p>
+<p>生成日期：2026年4月 | 建议在浏览器中打开此文件以获得最佳阅读体验</p>
+</footer>
+
+</div>
+</body>
+</html>
